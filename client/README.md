@@ -1,4 +1,4 @@
-# course-management
+# client
 
 ## Project setup
 ```

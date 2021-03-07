@@ -1,0 +1,14 @@
+{
+  "name": "course-management-server",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Woshikuzzaman Anik",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
