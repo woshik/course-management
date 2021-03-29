@@ -1,32 +1,35 @@
 <template>
   <Base>
-    <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" @submit.prevent="goToDashboard">
+    <form
+      class="login100-form validate-form p-l-55 p-r-55 p-t-178"
+      @submit.prevent="submit"
+    >
       <span class="login100-form-title"> Welcome </span>
 
-      <div
-        class="wrap-input100 validate-input m-b-16"
-        data-validate="Please enter username"
-      >
+      <div v-if="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+
+      <div class="wrap-input100 validate-input m-b-16">
         <input
           class="input100"
           type="text"
           name="email"
           placeholder="Email"
           autocomplete="off"
+          v-model.trim="email"
         />
         <span class="focus-input100"></span>
       </div>
 
-      <div
-        class="wrap-input100 validate-input m-b-16"
-        data-validate="Please enter password"
-      >
+      <div class="wrap-input100 validate-input m-b-16">
         <input
           class="input100"
           type="password"
-          name="pass"
+          name="password"
           placeholder="Password"
           autocomplete="off"
+          v-model.trim="password"
         />
         <span class="focus-input100"></span>
       </div>
@@ -47,6 +50,8 @@
 </template>
 
 <script>
+import UserService from '@/services/user.service';
+import FromValidation from '@/mixins/FormValidation';
 import Base from './Base.vue';
 
 export default {
@@ -54,6 +59,7 @@ export default {
   components: {
     Base,
   },
+  mixins: [FromValidation],
   props: {
     role: {
       type: String,
@@ -63,6 +69,13 @@ export default {
       },
     },
   },
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  formFields: ['email', 'password'],
   computed: {
     isAdmin() {
       return this.role === 'admin';
@@ -72,8 +85,17 @@ export default {
     },
   },
   methods: {
-    goToDashboard() {
-      this.$router.replace({ name: this.isAdmin ? 'AdminDashboard' : 'StudentDashboard' });
+    async submit() {
+      try {
+        const response = await UserService.login(this.formData);
+        this.$store.dispatch('user/setUserData', response.userData);
+        this.$store.dispatch('user/setAccessToken', response.token);
+        this.$router.push({ name: 'Dashboard' });
+      } catch (error) {
+        this.showMessage({
+          error: error?.response?.data?.message ?? 'Something Wrong!!!',
+        });
+      }
     },
   },
 };

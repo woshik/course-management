@@ -1,76 +1,75 @@
 <template>
   <Base>
-    <form class="login100-form validate-form p-l-55 p-r-55 p-t-178">
-      <span class="login100-form-title"> Registration </span>
+    <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" @submit.prevent="submit">
+      <span class="login100-form-title">Registration</span>
 
       <div
-        class="wrap-input100 validate-input m-b-16"
-        data-validate="Please enter username"
+        v-if="openMessage"
+        :class="[success ? 'alert-primary' : 'alert-danger']"
+        class="alert"
+        role="alert"
       >
+        This is a primary alert—check it out!
+      </div>
+
+      <div class="wrap-input100 validate-input m-b-16">
         <input
           class="input100"
           type="text"
           name="full-name"
           placeholder="Full Name"
           autocomplete="off"
+          v-model.trim="fullName"
         />
         <span class="focus-input100"></span>
       </div>
 
-      <div
-        class="wrap-input100 validate-input m-b-16"
-        data-validate="Please enter username"
-      >
+      <div class="wrap-input100 validate-input m-b-16">
         <input
           class="input100"
           placeholder="Date of Birth"
           type="text"
           name="dob"
+          autocomplete="off"
+          v-model.trim="dob"
           @focus="changeTextFieldToDate"
           @blur="changeDateFieldToText"
-          autocomplete="off"
         />
         <span class="focus-input100"></span>
       </div>
 
-      <div
-        class="wrap-input100 validate-input m-b-16"
-        data-validate="Please enter username"
-      >
+      <div class="wrap-input100 validate-input m-b-16">
         <input
           class="input100"
           type="text"
           name="email"
           placeholder="Email"
           autocomplete="off"
+          v-model.trim="email"
         />
         <span class="focus-input100"></span>
       </div>
 
-      <div
-        class="wrap-input100 validate-input m-b-16"
-        data-validate="Please enter password"
-      >
+      <div class="wrap-input100 validate-input m-b-16">
         <input
           class="input100"
           type="password"
           name="pass"
           placeholder="Password"
           autocomplete="off"
+          v-model.trim="password"
         />
         <span class="focus-input100"></span>
       </div>
 
-      <div
-        class="wrap-input100 validate-input m-b-16"
-        data-validate="Please enter password"
-      >
+      <div class="wrap-input100 validate-input m-b-16">
         <input
           class="input100"
           type="password"
           name="pass"
           placeholder="Confirm Password"
           autocomplete="off"
+          v-model.trim="confirmPassword"
         />
         <span class="focus-input100"></span>
       </div>
@@ -91,6 +90,8 @@
 </template>
 
 <script>
+import UserService from '@/services/user.service';
+import FromValidation from '@/mixins/FormValidation';
 import Base from './Base.vue';
 
 export default {
@@ -98,12 +99,33 @@ export default {
   components: {
     Base,
   },
+  mixins: [FromValidation],
+  data() {
+    return {
+      fullName: '',
+      dob: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    };
+  },
+  formFields: ['fullName', 'dob', 'email', 'password', 'confirmPassword'],
   methods: {
     changeTextFieldToDate(e) {
       e.target.type = 'date';
     },
     changeDateFieldToText(e) {
       e.target.type = 'text';
+    },
+    async submit() {
+      try {
+        await UserService.registration(this.formData);
+        this.$route.push({ name: 'StudentLogin' });
+      } catch (error) {
+        this.success = false;
+      }
+
+      this.showMessage();
     },
   },
 };

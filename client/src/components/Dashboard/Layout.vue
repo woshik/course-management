@@ -1,23 +1,11 @@
 <template>
   <div class="wrapper">
-    <side-bar>
-      <template v-slot:user-type>
-        <slot name="user-type">
-          Admin
-        </slot>
-      </template>
-
-      <template v-slot:menu-item>
-        <slot name="menu-item" />
-      </template>
-    </side-bar>
+    <side-bar />
 
     <div class="content">
       <nav-bar />
       <div class="container-fluid">
-        <div class="row">
-          <slot name="main-content" />
-        </div>
+        <slot />
       </div>
     </div>
   </div>

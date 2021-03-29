@@ -2,22 +2,65 @@
   <nav class="sidebar">
     <div class="sidebar-header">
       <h1 style="text-align: center">
-        <a href="index.html">
-          <slot name="user-type" />
-        </a>
+        <router-link :to="{ name: 'Dashboard' }">
+          {{ isAdmin ? "Admin" : "Student" }}
+        </router-link>
       </h1>
-      <span>A</span>
+      <span style="text-align: center">
+        <router-link :to="{ name: 'Dashboard' }">
+          {{ isAdmin ? "A" : "S" }}
+        </router-link>
+      </span>
     </div>
 
     <ul class="list-unstyled components">
-      <slot name="menu-item" />
+      <li v-for="item in getMenu" :key="item.id">
+        <router-link :to="{ name: item.routeName }">
+          <font-awesome-icon :icon="item.icon" />
+          {{ item.name }}
+        </router-link>
+      </li>
     </ul>
   </nav>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'SideBar',
+  data() {
+    return {
+      adminMenu: [
+        {
+          id: 1,
+          name: 'Dashboard',
+          icon: 'tachometer-alt',
+          routeName: 'Dashboard',
+        },
+        {
+          id: 2,
+          name: 'Manage Course',
+          icon: 'copy',
+          routeName: 'Course',
+        },
+      ],
+      studentMenu: [
+        {
+          id: 1,
+          name: 'Dashboard',
+          icon: 'tachometer-alt',
+          routeName: 'Dashboard',
+        },
+      ],
+    };
+  },
+  computed: {
+    getMenu() {
+      return this.isAdmin ? this.adminMenu : this.studentMenu;
+    },
+    ...mapGetters('user', ['isAdmin']),
+  },
 };
 </script>
 
@@ -50,10 +93,6 @@ export default {
 
 .sidebar.active .sidebar-header span {
   display: block;
-}
-
-.sidebar ul li a {
-  text-align: left;
 }
 
 .sidebar.active ul li a {
@@ -113,11 +152,6 @@ export default {
   background: #fff;
 }
 
-.sidebar ul li a i {
-  margin-right: 10px;
-  font-size: 19px;
-}
-
 .sidebar ul li.active > a,
 .sidebar a[aria-expanded="true"] {
   color: #fff;
@@ -130,17 +164,35 @@ export default {
     letter-spacing: 2px;
   }
   .sidebar {
-    min-width: 230px;
-    max-width: 230px;
+    min-width: 110px;
+    max-width: 100px;
+    text-align: center;
+  }
+
+  .sidebar ul li a {
+    padding: 20px 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar .sidebar-header h1,
+  .sidebar .CTAs {
+    display: none;
+  }
+
+  .sidebar .sidebar-header span {
+    display: block;
   }
 }
 
 @media (max-width: 768px) {
   .sidebar {
-    min-width: 80px;
-    max-width: 80px;
+    min-width: 110px;
+    max-width: 100px;
     text-align: center;
-    margin-left: -80px !important;
+    margin-left: 0 !important;
   }
   a[aria-expanded="false"]::before,
   a[aria-expanded="true"]::before {
@@ -154,29 +206,14 @@ export default {
   .sidebar.active {
     margin-left: 0 !important;
   }
-  .sidebar .sidebar-header h1,
-  .sidebar .CTAs {
-    display: none;
-  }
-  .sidebar .sidebar-header span {
-    display: block;
-  }
-  .sidebar ul li a {
-    padding: 20px 10px;
-  }
+
   .sidebar ul li a span {
     font-size: 0.85em;
-  }
-  .sidebar ul li a i {
-    margin-right: 0;
-    display: block;
   }
   .sidebar ul ul a {
     padding: 10px !important;
   }
-  .sidebar ul li a i {
-    font-size: 1.3em;
-  }
+
   .sidebar {
     margin-left: 0;
   }
@@ -189,6 +226,29 @@ export default {
   .sidebar.active {
     min-width: 95px;
     max-width: 95px;
+  }
+}
+</style>
+
+<style>
+.sidebar .sidebar-header h1 a,
+.sidebar .sidebar-header span a {
+  color: #fff;
+}
+
+.sidebar ul li a svg {
+  margin-right: 10px;
+  font-size: 19px;
+}
+
+@media (max-width: 900px) {
+  .sidebar ul li a svg {
+    margin-right: 0;
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    float: none;
+    margin-left: 0;
   }
 }
 </style>

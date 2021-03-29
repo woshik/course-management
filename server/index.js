@@ -1,14 +1,32 @@
-const express = require('express');
-const { resolve } = require('path');
+/* eslint-disable global-require */
+const cluster = require('cluster');
 
-const server = express();
+// clustering only apply on production server
+if (cluster.isMaster) {
+  require('dotenv').config({
+    debug: process.env.NODE_ENV !== 'production',
+  });
 
-// Serve any static files
-server.use(express.static(resolve(__dirname, '../client/dist')));
+  console.log(`Application Environment: ${process.env.NODE_ENV}`);
 
-// Handle React routing, return all requests to React app
-server.get('*', (req, res) => {
-	res.sendFile(resolve(__dirname, '../client/dist/index.html'));
-});
+  const cpuNum = process.env.NODE_ENV === 'production' ? require('os').cpus().length : 1;
 
-server.listen(5000, () => console.log('Server is listening on port 5000'));
+  for (let i = 0; i < cpuNum; i += 1) {
+    cluster.fork();
+  }
+
+  // every time when any child process fail start new process
+  cluster.on('exit', () => {
+    cluster.fork();
+  });
+} else {
+  const http = require('http');
+  const server = require('./server');
+
+  // http server start running
+  const { PORT = 5000 } = process.env;
+
+  http
+    .createServer(server)
+    .listen(PORT, () => console.log(`server is running on http://localhost:${PORT}`));
+}

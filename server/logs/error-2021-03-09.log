@@ -1,0 +1,72 @@
+2021-03-09T12:47:42.122Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T12:50:06.471Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T12:50:06.817Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T12:50:12.740Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T12:50:20.395Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T12:50:52.639Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T12:52:35.949Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T12:53:06.540Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T13:01:31.448Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T13:02:29.155Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T13:02:52.635Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+
+2021-03-09T13:03:24.823Z error [connectWithMongodb]:
+
+ 	MongoParseError: URI malformed, cannot be parsed 
+
+
+

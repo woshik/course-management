@@ -1,15 +1,7 @@
 <template>
   <nav class="navbar navbar-default mb-xl-5 mb-4">
     <div class="container-fluid">
-      <div class="navbar-header">
-        <button
-          type="button"
-          id="sidebarCollapse"
-          class="btn btn-info navbar-btn"
-        >
-          <font-awesome-icon icon="bars" />
-        </button>
-      </div>
+      <div class="navbar-header"></div>
 
       <ul class="top-icons-agileits-w3layouts float-right">
         <li class="nav-item dropdown" :class="{ open: dropDownOpen }">
@@ -31,15 +23,16 @@
           >
             <div class="profile d-flex mr-o">
               <div class="profile-r align-self-center">
-                <h3 class="sub-title-w3-agileits">Will Smith</h3>
-                <a href="mailto:info@example.com">info@example.com</a>
+                <h3 class="sub-title-w3-agileits">
+                  {{ this.getUserFullName }}
+                </h3>
+                <a href="mailto:info@example.com">{{ this.getUserEmail }}</a>
               </div>
             </div>
 
             <div class="dropdown-divider"></div>
-            <router-link :to="{ name: 'StudentLogin' }" class="dropdown-item">
-              Logout
-            </router-link>
+            <router-link :to="{ name: 'Profile' }" class="dropdown-item"> Profile </router-link>
+            <span @click="logout" class="dropdown-item cp"> Logout </span>
           </div>
         </li>
       </ul>
@@ -48,6 +41,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'NavBar',
   data() {
@@ -55,9 +50,16 @@ export default {
       dropDownOpen: false,
     };
   },
+  computed: {
+    ...mapGetters('user', ['getUserFullName', 'getUserEmail', 'isAdmin']),
+  },
   methods: {
     manageDropdown() {
       this.dropDownOpen = !this.dropDownOpen;
+    },
+    logout() {
+      this.$store.dispatch('user/logoutUser');
+      this.$router.push({ name: this.isAdmin ? 'AdminLogin' : 'StudentLogin' });
     },
   },
 };

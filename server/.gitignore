@@ -4,9 +4,9 @@ node_modules
 
 
 # local env files
+.env
+.env.test
 .env.local
-.env.*.local
-.env.sample
 
 # Log files
 npm-debug.log*

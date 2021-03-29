@@ -1,5 +1,5 @@
-body { 
-    background: #f1f1f1;
+body {
+	background: #f1f1f1;
 }
 
 body a {
@@ -15,8 +15,8 @@ a:hover {
 	text-decoration: none;
 }
 
-input[type="button"],
-button[type="submit"] {
+input[type='button'],
+button[type='submit'] {
 	transition: 0.5s all;
 	-webkit-transition: 0.5s all;
 	-moz-transition: 0.5s all;
@@ -31,7 +31,7 @@ h4,
 h5,
 h6 {
 	margin: 0;
-	
+
 	font-weight: 700;
 }
 
@@ -69,6 +69,8 @@ ul li {
 address {
 	margin-bottom: 0rem;
 }
+
+
 
 /*--// common css --*/
 
@@ -166,7 +168,7 @@ ul.top-icons-agileits-w3layouts a.nav-link i {
 .top-icons-agileits-w3layouts span.badge {
 	font-size: 10px;
 	font-weight: bold;
-	color: #FFF;
+	color: #fff;
 	background: #ff6c5f;
 	line-height: 13px;
 	width: 17px;
@@ -192,7 +194,7 @@ ul.top-icons-agileits-w3layouts a.nav-link i {
 
 .dropdown-item {
 	white-space: normal;
-	padding: .5em;
+	padding: 0.5em;
 }
 
 .notif-img-agileinfo img {
@@ -266,7 +268,7 @@ ul.top-icons-agileits-w3layouts a.nav-link i {
 }
 
 .s-r h6 i {
-	font-size: .85em;
+	font-size: 0.85em;
 	display: inline-block;
 	width: 50px;
 	height: 50px;
@@ -283,10 +285,10 @@ ul.top-icons-agileits-w3layouts a.nav-link i {
 /*-- Pie-chart --*/
 
 #chartdiv {
-	margin: -.5em auto;
+	margin: -0.5em auto;
 	text-align: center;
 	width: 100%;
-	height: 300px
+	height: 300px;
 }
 
 /*--// Pie-chart --*/
@@ -367,7 +369,7 @@ ul.top-icons-agileits-w3layouts a.nav-link i {
 /******Starts::Horizontal Alignment of Legends******/
 
 .simple-chart-legends {
-	background: #E7E7E7;
+	background: #e7e7e7;
 	border: 1px solid #d6d7dd;
 	padding: 5px;
 	margin: 2px 0px;
@@ -423,11 +425,11 @@ ul.top-icons-agileits-w3layouts a.nav-link i {
 .text a:hover {
 	text-decoration: none;
 	color: #fff;
-	transition: .5s all;
-	-webkit-transition: .5s all;
-	-moz-transition: .5s all;
-	-o-transition: .5s all;
-	-ms-transition: .5s all;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
 }
 
 .f-left a {
@@ -558,7 +560,7 @@ ul.icon-navigation {
 }
 
 ul.icon-navigation li:before {
-	content: "";
+	content: '';
 	width: 0;
 	height: 0;
 	position: absolute;
@@ -646,7 +648,7 @@ ul.icon-navigation li a {
 }
 
 .progress-striped .light-blue {
-	background: #4F52BA;
+	background: #4f52ba;
 }
 
 .progress-striped .red {
@@ -662,11 +664,58 @@ ul.icon-navigation li a {
 }
 
 .progress-striped .bar {
-	background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
-	background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-	background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-	background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-	background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+	background-image: -webkit-gradient(
+		linear,
+		0 100%,
+		100% 0,
+		color-stop(0.25, rgba(255, 255, 255, 0.15)),
+		color-stop(0.25, transparent),
+		color-stop(0.5, transparent),
+		color-stop(0.5, rgba(255, 255, 255, 0.15)),
+		color-stop(0.75, rgba(255, 255, 255, 0.15)),
+		color-stop(0.75, transparent),
+		to(transparent)
+	);
+	background-image: -webkit-linear-gradient(
+		45deg,
+		rgba(255, 255, 255, 0.15) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%,
+		transparent 75%,
+		transparent
+	);
+	background-image: -moz-linear-gradient(
+		45deg,
+		rgba(255, 255, 255, 0.15) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%,
+		transparent 75%,
+		transparent
+	);
+	background-image: -o-linear-gradient(
+		45deg,
+		rgba(255, 255, 255, 0.15) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%,
+		transparent 75%,
+		transparent
+	);
+	background-image: linear-gradient(
+		45deg,
+		rgba(255, 255, 255, 0.15) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%,
+		transparent 75%,
+		transparent
+	);
 	-webkit-background-size: 40px 40px;
 	-moz-background-size: 40px 40px;
 	-o-background-size: 40px 40px;
@@ -790,7 +839,7 @@ nav.inbox-nav-w3ls ul li {
 .inbox-side-strip-w3-agileits ul li a i {
 	font-size: 1.2em;
 	color: #c5c5c5;
-	margin: 2em 0em .3em;
+	margin: 2em 0em 0.3em;
 }
 
 .inbox-side-strip-w3-agileits ul li a {
@@ -808,7 +857,7 @@ nav.inbox-nav-w3ls ul li {
 .inbox-side-strip-w3-agileits ul li span.badge {
 	font-size: 10px;
 	font-weight: 500;
-	color: #FFF;
+	color: #fff;
 	background: #7892fb;
 	line-height: 12px;
 	text-align: center;
@@ -940,7 +989,7 @@ li.collection-item.selected {
 }
 
 .pricing-card-title span {
-	font-size: .5em;
+	font-size: 0.5em;
 	display: inline-block;
 }
 
@@ -1025,7 +1074,7 @@ section.pricing-tables h5.card-title {
 .pricing3 .btn-outline-primary {
 	color: #ffffff;
 	background-color: #5978f6;
-	border-color: rgba(255, 255, 255, 0.30);
+	border-color: rgba(255, 255, 255, 0.3);
 	font-size: 15px;
 	letter-spacing: 1.5px;
 }
@@ -1036,7 +1085,7 @@ section.pricing-tables h5.card-title {
 
 .pricing3 .card-header h4::after {
 	position: absolute;
-	content: "";
+	content: '';
 	width: 20%;
 	height: 1px;
 	background: #8199fd;
@@ -1045,7 +1094,7 @@ section.pricing-tables h5.card-title {
 }
 
 .pricing3 .pricing-card-title span {
-	font-size: .4em;
+	font-size: 0.4em;
 	letter-spacing: 4px;
 }
 
@@ -1143,19 +1192,19 @@ a.btn.more {
 ------------------------------------------*/
 
 .bg-grid {
-	padding-top: .75rem;
-	padding-bottom: .75rem;
-	background-color: rgba(86, 61, 124, .15);
-	border: 1px solid rgba(86, 61, 124, .2);
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+	background-color: rgba(86, 61, 124, 0.15);
+	border: 1px solid rgba(86, 61, 124, 0.2);
 	margin-top: 1rem;
 }
 
-.bd-example-row .row>.col,
-.bd-example-row .row>[class^=col-] {
-	padding-top: .75rem;
-	padding-bottom: .75rem;
-	background-color: rgba(86, 61, 124, .15);
-	border: 1px solid rgba(86, 61, 124, .2);
+.bd-example-row .row > .col,
+.bd-example-row .row > [class^='col-'] {
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+	background-color: rgba(86, 61, 124, 0.15);
+	border: 1px solid rgba(86, 61, 124, 0.2);
 }
 
 .bd-example-row-flex-cols .row {
@@ -1163,7 +1212,7 @@ a.btn.more {
 	background-color: rgba(4, 3, 3, 0.1);
 }
 
-.bd-example-row .row+.row {
+.bd-example-row .row + .row {
 	margin-top: 1rem;
 }
 
@@ -1201,7 +1250,7 @@ span.error-subtext-w3l {
 
 a.error-w3l-btn,
 button.error-w3l-btn {
-	padding: 0.6em .5em;
+	padding: 0.6em 0.5em;
 	font-size: 0.9em;
 	letter-spacing: 1px;
 	text-transform: uppercase;
@@ -1236,7 +1285,7 @@ h1.paragraph-agileits-w3layouts a:hover {
 
 .error-search-form input.form-control {
 	width: 70%;
-	background: rgba(76, 110, 245, 0.30);
+	background: rgba(76, 110, 245, 0.3);
 	border: none;
 	font-size: 16px;
 	letter-spacing: 0.8px;
@@ -1306,7 +1355,7 @@ h1.paragraph-agileits-w3layouts a:hover {
 	display: block;
 	width: 100%;
 	padding: 0.7em 1em;
-	margin: .5em 0em 1.5em;
+	margin: 0.5em 0em 1.5em;
 	font-size: 15px;
 	letter-spacing: 1px;
 	text-align: center;
@@ -1363,7 +1412,7 @@ canvas.chart1 {
 #circleBar-mobile-labels tspan {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 10px;
-	fill: #6D6E71;
+	fill: #6d6e71;
 }
 
 #circleBar-web-values tspan,
@@ -1413,18 +1462,17 @@ ul.percentg-circles-w3ls .chart .figure {
 }
 
 .chart.circle-one {
-    margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
-
 .circle-one .pie {
-    position: relative;
-    margin-bottom: 10px;
-    width: 118px;
-    height: 118px;
-    border: 1px solid #dcdcdc;
-    border-radius: 50%;
-    background-color: #f5f5f5;
+	position: relative;
+	margin-bottom: 10px;
+	width: 118px;
+	height: 118px;
+	border: 1px solid #dcdcdc;
+	border-radius: 50%;
+	background-color: #f5f5f5;
 }
 
 .circle-one .pie::after {
@@ -1440,7 +1488,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	border-radius: 50%;
 }
 
-.circle-one .pie>div {
+.circle-one .pie > div {
 	width: 118px;
 	height: 118px;
 	border-radius: 50%;
@@ -1581,23 +1629,22 @@ ul.percentg-circles-w3ls .chart .figure {
     Maps Page
 ------------------------------------------*/
 
-
 /*--responsive--*/
 
-@media(max-width:1440px) {
+@media (max-width: 1440px) {
 	section.pricing-tables h5.card-title {
 		font-size: 2.5em;
 	}
 }
 
-@media(max-width:1366px) {
+@media (max-width: 1366px) {
 	canvas.SimpleChartcanvas {
 		/*max-width: 925px !important;*/
 		margin: 0 auto !important;
 	}
 }
 
-@media(max-width:1280px) {
+@media (max-width: 1280px) {
 	h4.tittle-w3-agileits {
 		font-size: 1.75em;
 	}
@@ -1607,7 +1654,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	li.button a span {
 		margin-right: 0px;
 	}
-	.bd-example-row .row>.col {
+	.bd-example-row .row > .col {
 		font-size: 14px;
 		letter-spacing: 0.5px;
 	}
@@ -1628,7 +1675,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:1080px) {
+@media (max-width: 1080px) {
 	#sidebar {
 		min-width: 210px;
 		max-width: 210px;
@@ -1667,7 +1714,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 	h4.error-title-agileits {
 		font-size: 8em;
-		margin-bottom: .1em;
+		margin-bottom: 0.1em;
 		text-align: center;
 		border-bottom: 3px solid #f75757;
 	}
@@ -1696,9 +1743,9 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 	.form-body-w3-agile .form-control {
 		padding: 0.6em 1em;
-		margin: .5em 0em 1em;
+		margin: 0.5em 0em 1em;
 		font-size: 14px;
-		letter-spacing: .8px;
+		letter-spacing: 0.8px;
 	}
 	.form-body-w3-agile label,
 	.forgot a {
@@ -1707,22 +1754,19 @@ ul.percentg-circles-w3ls .chart .figure {
 		letter-spacing: 0.6px;
 		color: #91a6f9;
 	}
-	canvas.SimpleChartcanvas {
-		/*max-width: 730px !important;*/
-	}
 	.index-rcontent {
 		padding-left: 0;
 	}
 }
 
-@media(max-width:1050px) {
+@media (max-width: 1050px) {
 	.btn-primary {
 		font-size: 15px;
 		letter-spacing: 0.5px;
 	}
 }
 
-@media(max-width:1024px) {
+@media (max-width: 1024px) {
 	.validform {
 		display: inherit;
 	}
@@ -1730,22 +1774,16 @@ ul.percentg-circles-w3ls .chart .figure {
 	.validform2 {
 		max-width: 100%;
 	}
-	.bd-example-row .row>.col,
-	.bd-example-row .row>[class^=col-] {
+	.bd-example-row .row > .col,
+	.bd-example-row .row > [class^='col-'] {
 		font-size: 13px;
 	}
 	.form-body-w3-agile.text-center {
 		padding: 3em 3em;
 	}
-	canvas.SimpleChartcanvas {
-		/*--max-width: 675px !important;--*/
-	}
 }
 
-@media(max-width:991px) {
-	canvas.SimpleChartcanvas {
-		/*max-width: 620px !important;*/
-	}
+@media (max-width: 991px) {
 	.bd-example-row-flex-cols .row {
 		min-height: 8rem;
 	}
@@ -1773,7 +1811,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:900px) {
+@media (max-width: 900px) {
 	ul.top-icons-agileits-w3layouts a.nav-link i {
 		font-size: 14px;
 	}
@@ -1796,10 +1834,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:800px) {
-	canvas.SimpleChartcanvas {
-		/*max-width: 450px !important;*/
-	}
+@media (max-width: 800px) {
 	.copyright-w3layouts p {
 		font-size: 13px;
 		letter-spacing: 1.3px;
@@ -1815,18 +1850,15 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:768px) {
+@media (max-width: 768px) {
 	.sub-title-w3-agileits {
 		font-size: 1.4em;
 	}
-	canvas.SimpleChartcanvas {
-		/*max-width: 750px !important;*/
-	}
 }
 
-@media(max-width:667px) {
-	.navbar>.container,
-	.navbar>.container-fluid {
+@media (max-width: 667px) {
+	.navbar > .container,
+	.navbar > .container-fluid {
 		display: block;
 	}
 	.navbar-header {
@@ -1851,10 +1883,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:600px) {
-	canvas.SimpleChartcanvas {
-		/*max-width: 500px !important;*/
-	}
+@media (max-width: 600px) {
 	span.error-subtext-w3l {
 		font-size: 22px;
 	}
@@ -1886,10 +1915,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:568px) {
-	canvas.SimpleChartcanvas {
-		/*max-width: 465px !important;*/
-	}
+@media (max-width: 568px) {
 	.text h2 {
 		font-size: 20px;
 		letter-spacing: 2px;
@@ -1938,21 +1964,18 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:480px) {
+@media (max-width: 480px) {
 	.dropdown-menu {
 		min-width: 17rem;
 	}
 	.s-r h6 i {
-		font-size: .8em;
+		font-size: 0.8em;
 		line-height: 2.5em;
 		width: 45px;
 		height: 45px;
 	}
 	.s-r h6 {
 		font-size: 22px;
-	}
-	canvas.SimpleChartcanvas {
-		/*max-width: 380px !important;*/
 	}
 	.card-columns {
 		-webkit-column-count: 1;
@@ -1983,7 +2006,7 @@ ul.percentg-circles-w3ls .chart .figure {
 		min-height: 275px;
 	}
 	.copyright-w3layouts p {
-		padding: 0.5em 1.5em
+		padding: 0.5em 1.5em;
 	}
 	g#circleBar-web-group {
 		transform: translate(-15%, 0%);
@@ -1996,12 +2019,9 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:440px) {
+@media (max-width: 440px) {
 	.dropdown-menu {
 		right: -84%;
-	}
-	canvas.SimpleChartcanvas {
-		/*max-width: 340px !important;*/
 	}
 	.index-rcontent,
 	.email-list {
@@ -2016,7 +2036,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:414px) {
+@media (max-width: 414px) {
 	.drop-1 {
 		right: -275%;
 		min-width: 16em;
@@ -2053,7 +2073,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:384px) {
+@media (max-width: 384px) {
 	.drop-1 {
 		right: -317%;
 	}
@@ -2081,31 +2101,31 @@ ul.percentg-circles-w3ls .chart .figure {
 		min-height: 330px;
 	}
 	text#circleBar-web-values {
-		transform: translate(85px,324px)!important;
+		transform: translate(85px, 324px) !important;
 	}
 	text#circleBar-web-labels {
-		transform: translate(142px,324px);
+		transform: translate(142px, 324px);
 	}
 	svg.circular-bars {
 		height: 405px;
 	}
 	rect#circleBar-web-clipLabels {
-		transform: translate(-141px,89px);
-		width: 100%!important;
+		transform: translate(-141px, 89px);
+		width: 100% !important;
 	}
 	text#circleBar-mobile-values {
-		transform: translate(73px,330px);
+		transform: translate(73px, 330px);
 	}
 	text#circleBar-mobile-labels {
-		transform: translate(131px,330px);
+		transform: translate(131px, 330px);
 	}
-	rect#circleBar-mobile-clipLabels{
-		transform: translate(-141px,89px);
-		width: 100%!important;
+	rect#circleBar-mobile-clipLabels {
+		transform: translate(-141px, 89px);
+		width: 100% !important;
 	}
 }
 
-@media(max-width:375px) {
+@media (max-width: 375px) {
 	.drop-1 {
 		right: -308%;
 	}
@@ -2120,7 +2140,7 @@ ul.percentg-circles-w3ls .chart .figure {
 	}
 }
 
-@media(max-width:320px) {
+@media (max-width: 320px) {
 	.s-r h6 {
 		font-size: 19px;
 	}
@@ -2149,4 +2169,8 @@ ul.percentg-circles-w3ls .chart .figure {
 	g#circleBar-mobile-group {
 		transform: translate(-24%, 0%);
 	}
+}
+
+.cp {
+	cursor: pointer;
 }
