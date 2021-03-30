@@ -13,12 +13,21 @@
         @delete-row="deleteRow"
         @api-call="callToAPi"
       >
-        <button class="btn btn-success btn-sm m-1" @click="assignCourse(rowData)">
+        <button
+          class="btn btn-success btn-sm m-1"
+          @click="assignCourse(rowData)"
+        >
           <font-awesome-icon icon="address-book" /> Assign Course
         </button>
       </vue-table>
     </div>
-    <modal-window :openModal="showModal" />
+    <modal-window v-if="showModal" @open="handleModal">
+      <template v-slot:title> Delete Course </template>
+      You want to really delete this course?
+      <template v-slot:footer>
+        <button class="btn btn-danger" @click="deleteRow(null)">Delete</button>
+      </template>
+    </modal-window>
   </div>
 </template>
 
@@ -47,27 +56,45 @@ export default {
       tabeleData: [],
       totalRow: 0,
       showModal: false,
+      selectedId: '',
     };
   },
   methods: {
     async callToAPi(reqData) {
-      const response = await this.CourseService.get(reqData);
-      this.tabeleData = response.data;
-      this.totalRow = response.total;
-      this.$nextTick(() => {
-        this.$refs.vuetable.updateTable();
-      });
+      try {
+        const response = await this.CourseService.get(reqData);
+        this.tabeleData = response.data;
+        this.totalRow = response.total;
+        this.$nextTick(() => {
+          this.$refs.vuetable.updateTable();
+        });
+      } catch (error) {
+        console.log(error);
+      }
     },
     addCourse() {
       this.$router.push({ name: 'AddCourse' });
     },
     editRow(id) {
-      console.log(id);
+      this.$router.push({ name: 'EditCourse', params: { id } });
     },
-    deleteRow(id) {
-      this.showModal = true;
-      console.log(this.showModal);
-      console.log(id, 'delete');
+    async deleteRow(id) {
+      if (id) {
+        this.selectedId = id;
+        this.handleModal(true);
+        return;
+      }
+
+      try {
+        await this.CourseService.delete(this.selectedId);
+        this.callToAPi();
+        this.handleModal(false);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    handleModal(open) {
+      this.showModal = open;
     },
   },
 };

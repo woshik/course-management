@@ -30,17 +30,20 @@ const getCoursesData = asyncFunction(async (query) => {
   const where = {
     $or: [
       {
-        courseName: RegExp(`.*${query.search_keyword}.*`, 'i'),
+        courseName: RegExp(`.*${query?.search_keyword ?? ''}.*`, 'i'),
       },
       {
-        courseCode: RegExp(`.*${query.search_keyword}.*`, 'i'),
+        courseCode: RegExp(`.*${query?.search_keyword ?? ''}.*`, 'i'),
       },
     ],
   };
 
+  const perPage = 15;
+  const currentPage = (parseInt(query?.current_page ?? 1) - 1);
+
   const courseData = await courses.find(where, {
-    skip: (parseInt(query.current_page) - 1) * parseInt(query.per_page),
-    limit: parseInt(query.per_page),
+    skip: currentPage * perPage,
+    limit: perPage,
   }).toArray();
 
   return {
@@ -49,8 +52,44 @@ const getCoursesData = asyncFunction(async (query) => {
   };
 });
 
+const removeCoursesData = asyncFunction(async ({ id }) => {
+  const courses = await getDB().collection('courses');
+
+  const result = await courses.deleteOne({
+    _id: id,
+  });
+
+  return result.deletedCount === 1;
+});
+
+const getCoursesById = asyncFunction(async ({ id }) => {
+  const courses = await getDB().collection('courses');
+
+  const result = await courses.findOne({
+    _id: id,
+  });
+
+  return result;
+});
+
+const editCourses = asyncFunction(async ({ id, courseName, courseCode }) => {
+  const courses = await getDB().collection('courses');
+
+  const result = await courses.updateOne({ _id: id },
+    {
+      $set: {
+        courseName, courseCode,
+      },
+    });
+
+  return result;
+});
+
 module.exports = {
   getCourseDataByCode,
   getCoursesData,
   addCourse,
+  removeCoursesData,
+  getCoursesById,
+  editCourses,
 };

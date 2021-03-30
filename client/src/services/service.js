@@ -14,7 +14,7 @@ export default class Service {
       .then((result) => result);
   }
 
-  get(params = {}) {
+  get(params) {
     return request({
       url: this.apiURL,
       method: 'get',
@@ -24,32 +24,23 @@ export default class Service {
 
   getById(id) {
     return request({
-      url: this.apiURL,
+      url: `${this.apiURL}/${id}`,
       method: 'get',
-      params: {
-        id,
-      },
     }).then((result) => result);
   }
 
   update(id, params) {
     return request({
-      url: this.apiURL,
+      url: `${this.apiURL}/${id}`,
       method: 'patch',
       params,
-      data: {
-        id,
-      },
     }).then((result) => result);
   }
 
   delete(id) {
     return request({
-      url: this.apiURL,
+      url: `${this.apiURL}/${id}`,
       method: 'delete',
-      params: {
-        id,
-      },
     }).then((result) => result);
   }
 }

@@ -30,7 +30,7 @@
           />
         </div>
 
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary">{{buttonLabel}}</button>
       </form>
     </div>
   </div>
@@ -41,7 +41,7 @@ import CourseService from '@/services/course.service';
 import FromValidation from '@/mixins/FormValidation';
 
 export default {
-  name: 'AddCourse',
+  name: 'CourseForm',
   mixins: [FromValidation],
   data() {
     return {
@@ -51,16 +51,33 @@ export default {
     };
   },
   formFields: ['courseName', 'courseCode'],
+  async mounted() {
+    if (this.$route.params.id) {
+      const { courseName, courseCode } = await this.CourseService.getById(this.$route.params.id);
+      this.courseName = courseName;
+      this.courseCode = courseCode;
+    }
+  },
   methods: {
     async submit() {
       try {
-        await this.CourseService.add(this.formData);
-        this.$router.push({ name: 'Course' });
+        if (this.$route.params.id) {
+          await this.CourseService.update(this.$route.params.id, this.formData);
+          this.$router.push({ name: 'Course' });
+        } else {
+          await this.CourseService.add(this.formData);
+          this.$router.push({ name: 'Course' });
+        }
       } catch (error) {
         this.showMessage({
           error: error?.response?.data?.message ?? 'Something Wrong!!!',
         });
       }
+    },
+  },
+  computed: {
+    buttonLabel() {
+      return this.$route.params.id ? 'Edit' : 'Add';
     },
   },
 };

@@ -1,5 +1,7 @@
-const { login, registration, addCourse } = require('../validation/index');
-const { authTokenValidation } = require('../middleware');
+const {
+  login, registration, addCourse, validateId,
+} = require('../validation/index');
+const { authTokenValidation, convertMongoObjectId } = require('../middleware');
 const validate = require('../validation/validate');
 
 module.exports = {
@@ -24,6 +26,13 @@ module.exports = {
     function: 'getData',
     middleware: [authTokenValidation],
   },
+  getCourseById: {
+    url: '/course/:id',
+    method: 'get',
+    controller: 'course',
+    function: 'getCourseById',
+    middleware: [authTokenValidation, validate(validateId), convertMongoObjectId],
+  },
   addCourse: {
     url: '/course',
     method: 'post',
@@ -31,5 +40,18 @@ module.exports = {
     function: 'add',
     middleware: [authTokenValidation, validate(addCourse)],
   },
-
+  editCourse: {
+    url: '/course/:id',
+    method: 'patch',
+    controller: 'course',
+    function: 'edit',
+    middleware: [authTokenValidation, validate(validateId), convertMongoObjectId],
+  },
+  deleteCourse: {
+    url: '/course/:id',
+    method: 'delete',
+    controller: 'course',
+    function: 'remove',
+    middleware: [authTokenValidation, validate(validateId), convertMongoObjectId],
+  },
 };

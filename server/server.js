@@ -58,7 +58,7 @@ server.use(
 
 // catch 404 and forward to error handler
 server.use((req, res) => {
-  res.status(404).send("Sorry can't find that!");
+  res.status(404).send("Sorry can't find that api!");
 });
 
 // error handler

@@ -2,18 +2,6 @@
   <div>
     <div class="clearfix" />
     <div class="form-group mb-3">
-      <select
-        class="form-control float-left"
-        style="width: 20%"
-        v-model.number="perPage"
-        @change="perPageValueChange"
-      >
-        <option value="10">10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-      </select>
-
       <input
         type="text"
         class="form-control float-right"
@@ -89,7 +77,7 @@ export default {
           tableClass: 'table table-striped table-bordered table-hover',
         },
       },
-      perPage: 10,
+      perPage: 15,
       searchKeyWord: '',
       timer: null,
       apiCall: true,
@@ -141,9 +129,6 @@ export default {
         this.apiCall = true;
         this.$refs.vuetable.refresh();
       }, 500);
-    },
-    perPageValueChange() {
-      this.apiCall = true;
     },
   },
 };
