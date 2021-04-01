@@ -10,6 +10,8 @@ import {
   faArrowUp,
   faArrowDown,
   faAddressBook,
+  faUserGraduate,
+  faCalendarAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -22,6 +24,8 @@ library.add(
   faArrowUp,
   faArrowDown,
   faAddressBook,
+  faUserGraduate,
+  faCalendarAlt,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

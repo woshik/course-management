@@ -6,24 +6,10 @@ Vue.use(VueRouter);
 const publicRoutes = [
   {
     path: '/login',
-    name: 'StudentLogin',
+    name: 'UserLogin',
     component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue'),
     meta: {
-      title: 'Student Login',
-    },
-    props: {
-      role: 'student',
-    },
-  },
-  {
-    path: '/admin/login',
-    name: 'AdminLogin',
-    component: () => import(/* webpackChunkName: "admin-login" */ '@/views/Login.vue'),
-    meta: {
-      title: 'Admin Login',
-    },
-    props: {
-      role: 'admin',
+      title: 'User Login',
     },
   },
   {
@@ -41,7 +27,7 @@ const publicRoutes = [
       {
         path: '',
         name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/admin/Dashboard.vue'),
+        component: () => import(/* webpackChunkName: "AdminDashboard" */ '@/views/admin/Dashboard.vue'),
         meta: {
           title: 'Dashboard',
         },
@@ -49,7 +35,7 @@ const publicRoutes = [
       {
         path: '/course',
         name: 'Course',
-        component: () => import(/* webpackChunkName: "course" */ '@/views/admin/Course.vue'),
+        component: () => import(/* webpackChunkName: "Course" */ '@/views/admin/Course.vue'),
         meta: {
           title: 'Manage Course',
         },
@@ -57,7 +43,7 @@ const publicRoutes = [
       {
         path: '/course/add',
         name: 'AddCourse',
-        component: () => import(/* webpackChunkName: "course" */ '@/views/admin/CourseForm.vue'),
+        component: () => import(/* webpackChunkName: "CourseForm" */ '@/views/admin/CourseForm.vue'),
         meta: {
           title: 'Add Course',
         },
@@ -65,15 +51,47 @@ const publicRoutes = [
       {
         path: '/course/edit/:id',
         name: 'EditCourse',
-        component: () => import(/* webpackChunkName: "course" */ '@/views/admin/CourseForm.vue'),
+        component: () => import(/* webpackChunkName: "courseForm" */ '@/views/admin/CourseForm.vue'),
         meta: {
           title: 'Edit Course',
         },
       },
       {
+        path: '/student',
+        name: 'Student',
+        component: () => import(/* webpackChunkName: "Student" */ '@/views/admin/Student.vue'),
+        meta: {
+          title: 'Manage Student',
+        },
+      },
+      {
+        path: '/student/add',
+        name: 'AddStudent',
+        component: () => import(/* webpackChunkName: "StudentForm" */ '@/views/admin/StudentForm.vue'),
+        meta: {
+          title: 'Add Student',
+        },
+      },
+      {
+        path: '/student/edit/:id',
+        name: 'EditStudent',
+        component: () => import(/* webpackChunkName: "StudentForm" */ '@/views/admin/StudentForm.vue'),
+        meta: {
+          title: 'Edit Student',
+        },
+      },
+      {
+        path: '/schedule',
+        name: 'Schedule',
+        component: () => import(/* webpackChunkName: "StudentForm" */ '@/views/admin/Schedule.vue'),
+        meta: {
+          title: 'Manage Schedule',
+        },
+      },
+      {
         path: '/profile',
         name: 'Profile',
-        component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue'),
+        component: () => import(/* webpackChunkName: "Profile" */ '@/views/Profile.vue'),
         meta: {
           title: 'Profile',
         },

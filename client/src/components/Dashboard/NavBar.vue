@@ -59,7 +59,7 @@ export default {
     },
     logout() {
       this.$store.dispatch('user/logoutUser');
-      this.$router.push({ name: this.isAdmin ? 'AdminLogin' : 'StudentLogin' });
+      this.$router.push({ name: 'UserLogin' });
     },
   },
 };

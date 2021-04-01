@@ -38,7 +38,7 @@
         <button type="submit" class="login100-form-btn">Sign in</button>
       </div>
 
-      <div v-if="isStudent" class="flex-col-c p-t-70 p-b-40">
+      <div class="flex-col-c p-t-70 p-b-40">
         <span class="txt1 p-b-9"> Don’t have an account? </span>
 
         <router-link :to="{ name: 'StudentRegistration' }" class="txt3">
@@ -60,15 +60,6 @@ export default {
     Base,
   },
   mixins: [FromValidation],
-  props: {
-    role: {
-      type: String,
-      default: 'admin',
-      validation(value) {
-        return ['admin', 'student'].includes(value);
-      },
-    },
-  },
   data() {
     return {
       email: '',
@@ -76,14 +67,6 @@ export default {
     };
   },
   formFields: ['email', 'password'],
-  computed: {
-    isAdmin() {
-      return this.role === 'admin';
-    },
-    isStudent() {
-      return this.role === 'student';
-    },
-  },
   methods: {
     async submit() {
       try {

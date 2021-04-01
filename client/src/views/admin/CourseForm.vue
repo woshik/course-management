@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="outer-w3-agile col-xl mt-3">
-      <h4 class="tittle-w3-agileits mb-4">Add Course</h4>
+      <h4 class="tittle-w3-agileits mb-4">{{formLabel}} Course</h4>
        <div v-if="errorMessage" class="alert alert-danger" role="alert">
         {{ errorMessage }}
       </div>
@@ -30,7 +30,7 @@
           />
         </div>
 
-        <button type="submit" class="btn btn-primary">{{buttonLabel}}</button>
+        <button type="submit" class="btn btn-primary">{{formLabel}}</button>
       </form>
     </div>
   </div>
@@ -76,7 +76,7 @@ export default {
     },
   },
   computed: {
-    buttonLabel() {
+    formLabel() {
       return this.$route.params.id ? 'Edit' : 'Add';
     },
   },

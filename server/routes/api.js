@@ -1,5 +1,9 @@
 const {
-  login, registration, addCourse, validateId,
+  login,
+  registration,
+  addCourse,
+  addStudent,
+  validateId,
 } = require('../validation/index');
 const { authTokenValidation, convertMongoObjectId } = require('../middleware');
 const validate = require('../validation/validate');
@@ -51,6 +55,41 @@ module.exports = {
     url: '/course/:id',
     method: 'delete',
     controller: 'course',
+    function: 'remove',
+    middleware: [authTokenValidation, validate(validateId), convertMongoObjectId],
+  },
+  getStudent: {
+    url: '/student',
+    method: 'get',
+    controller: 'student',
+    function: 'getData',
+    middleware: [authTokenValidation],
+  },
+  getStudentById: {
+    url: '/student/:id',
+    method: 'get',
+    controller: 'student',
+    function: 'getDataById',
+    middleware: [authTokenValidation, validate(validateId), convertMongoObjectId],
+  },
+  addStudent: {
+    url: '/student',
+    method: 'post',
+    controller: 'student',
+    function: 'add',
+    middleware: [authTokenValidation, validate(addStudent)],
+  },
+  editStudent: {
+    url: '/student/:id',
+    method: 'patch',
+    controller: 'student',
+    function: 'edit',
+    middleware: [authTokenValidation, validate(validateId), convertMongoObjectId],
+  },
+  deleteStudent: {
+    url: '/student/:id',
+    method: 'delete',
+    controller: 'student',
     function: 'remove',
     middleware: [authTokenValidation, validate(validateId), convertMongoObjectId],
   },

@@ -20,7 +20,7 @@ router.beforeEach((to, _, next) => {
   } else if (whiteList.includes(to.path)) {
     next();
   } else {
-    next({ name: 'StudentLogin' });
+    next({ name: 'UserLogin' });
   }
 });
 

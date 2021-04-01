@@ -81,7 +81,7 @@
       <div class="flex-col-c p-t-50 p-b-40">
         <span class="txt1 p-b-9"> Already have an Accout? </span>
 
-        <router-link :to="{ name: 'StudentLogin' }" class="txt3">
+        <router-link :to="{ name: 'UserLogin' }" class="txt3">
           Back To Login
         </router-link>
       </div>
@@ -120,7 +120,7 @@ export default {
     async submit() {
       try {
         await UserService.registration(this.formData);
-        this.$route.push({ name: 'StudentLogin' });
+        this.$route.push({ name: 'UserLogin' });
       } catch (error) {
         this.success = false;
       }

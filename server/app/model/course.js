@@ -38,7 +38,7 @@ const getCoursesData = asyncFunction(async (query) => {
     ],
   };
 
-  const perPage = 15;
+  const perPage = parseInt(query?.perPage ?? 15);
   const currentPage = (parseInt(query?.current_page ?? 1) - 1);
 
   const courseData = await courses.find(where, {

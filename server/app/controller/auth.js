@@ -33,7 +33,7 @@ const login = async (req, res, next) => {
 };
 
 const registration = async (req, res, next) => {
-  const userData = req.routeData;
+  const userData = { ...req.routeData, active: false };
 
   const userExist = await getUserByEmail(userData.email);
 

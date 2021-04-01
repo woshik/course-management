@@ -44,6 +44,18 @@ export default {
           icon: 'copy',
           routeName: 'Course',
         },
+        {
+          id: 3,
+          name: 'Manage Student',
+          icon: 'user-graduate',
+          routeName: 'Student',
+        },
+        {
+          id: 4,
+          name: 'Manage Schedule',
+          icon: 'calendar-alt',
+          routeName: 'Schedule',
+        },
       ],
       studentMenu: [
         {

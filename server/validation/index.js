@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const { login, registration } = require('./auth');
 const { addCourse } = require('./course');
+const { addStudent } = require('./student');
 
 const validateId = {
   id: Joi.string().required().messages({
@@ -13,5 +14,6 @@ module.exports = {
   login,
   registration,
   addCourse,
+  addStudent,
   validateId,
 };
