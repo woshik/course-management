@@ -22,7 +22,7 @@ const publicRoutes = [
   },
   {
     path: '/',
-    component: () => import(/* webpackChunkName: "dashboard-layout" */ '@/views/Dashboard.vue'),
+    component: () => import(/* webpackChunkName: "dashboard-layout" */ '@/views/Panel.vue'),
     children: [
       {
         path: '',
@@ -30,6 +30,7 @@ const publicRoutes = [
         component: () => import(/* webpackChunkName: "AdminDashboard" */ '@/views/admin/Dashboard.vue'),
         meta: {
           title: 'Dashboard',
+          active: 'Dashboard',
         },
       },
       {
@@ -38,6 +39,7 @@ const publicRoutes = [
         component: () => import(/* webpackChunkName: "Course" */ '@/views/admin/Course.vue'),
         meta: {
           title: 'Manage Course',
+          active: 'Course',
         },
       },
       {
@@ -46,6 +48,7 @@ const publicRoutes = [
         component: () => import(/* webpackChunkName: "CourseForm" */ '@/views/admin/CourseForm.vue'),
         meta: {
           title: 'Add Course',
+          active: 'Course',
         },
       },
       {
@@ -54,6 +57,7 @@ const publicRoutes = [
         component: () => import(/* webpackChunkName: "courseForm" */ '@/views/admin/CourseForm.vue'),
         meta: {
           title: 'Edit Course',
+          active: 'Course',
         },
       },
       {
@@ -62,6 +66,7 @@ const publicRoutes = [
         component: () => import(/* webpackChunkName: "Student" */ '@/views/admin/Student.vue'),
         meta: {
           title: 'Manage Student',
+          active: 'Student',
         },
       },
       {
@@ -70,6 +75,7 @@ const publicRoutes = [
         component: () => import(/* webpackChunkName: "StudentForm" */ '@/views/admin/StudentForm.vue'),
         meta: {
           title: 'Add Student',
+          active: 'Student',
         },
       },
       {
@@ -78,6 +84,7 @@ const publicRoutes = [
         component: () => import(/* webpackChunkName: "StudentForm" */ '@/views/admin/StudentForm.vue'),
         meta: {
           title: 'Edit Student',
+          active: 'Student',
         },
       },
       {
@@ -86,6 +93,7 @@ const publicRoutes = [
         component: () => import(/* webpackChunkName: "StudentForm" */ '@/views/admin/Schedule.vue'),
         meta: {
           title: 'Manage Schedule',
+          active: 'Schedule',
         },
       },
       {

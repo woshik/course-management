@@ -8,6 +8,22 @@ export default class User extends Service {
     super(api);
   }
 
+  userUpdate(data) {
+    return request({
+      url: `${this.apiURL}/update`,
+      method: 'patch',
+      data,
+    }).then((result) => result);
+  }
+
+  userUpdatePassword(data) {
+    return request({
+      url: `${this.apiURL}/password`,
+      method: 'patch',
+      data,
+    }).then((result) => result);
+  }
+
   static login(params) {
     return request({
       url: 'login',

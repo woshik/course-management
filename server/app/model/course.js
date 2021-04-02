@@ -85,6 +85,12 @@ const editCourses = asyncFunction(async ({ id, courseName, courseCode }) => {
   return result;
 });
 
+const totalCount = asyncFunction(async () => {
+  const courses = await getDB().collection('courses');
+  const result = await courses.countDocuments();
+  return result;
+});
+
 module.exports = {
   getCourseDataByCode,
   getCoursesData,
@@ -92,4 +98,5 @@ module.exports = {
   removeCoursesData,
   getCoursesById,
   editCourses,
+  totalCount,
 };

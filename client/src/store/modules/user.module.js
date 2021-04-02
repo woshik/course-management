@@ -38,6 +38,15 @@ export default {
       localStorage.setItem(tokenStorageName, JSON.stringify(payload));
       commit('SET_ACCESS_TOKEN', payload);
     },
+    updateUserData({ commit, state }, payload) {
+      const data = {
+        ...state.user,
+        ...payload,
+      };
+
+      localStorage.setItem(userStorageName, JSON.stringify(data));
+      commit('SET_USER_DATA', data);
+    },
     logoutUser({ commit }) {
       localStorage.removeItem(userStorageName);
       localStorage.removeItem(tokenStorageName);
@@ -47,6 +56,7 @@ export default {
   getters: {
     getUserFullName: ({ user }) => user.fullName,
     getUserEmail: ({ user }) => user.email,
+    getUserDob: ({ user }) => user.dob,
     getUserRole: ({ user }) => user.role,
     getUserToken: ({ token: accessToken }) => accessToken,
     isAdmin: ({ user }) => user.role === 'admin',

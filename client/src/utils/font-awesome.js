@@ -12,6 +12,7 @@ import {
   faAddressBook,
   faUserGraduate,
   faCalendarAlt,
+  faBookOpen,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -26,6 +27,7 @@ library.add(
   faAddressBook,
   faUserGraduate,
   faCalendarAlt,
+  faBookOpen,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

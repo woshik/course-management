@@ -1,13 +1,15 @@
 <template>
   <Base>
-    <form
-      class="login100-form validate-form p-l-55 p-r-55 p-t-178"
-      @submit.prevent="submit"
-    >
+    <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" @submit.prevent="submit">
       <span class="login100-form-title"> Welcome </span>
 
-      <div v-if="errorMessage" class="alert alert-danger" role="alert">
-        {{ errorMessage }}
+      <div
+        v-if="messageDisplay"
+        :class="[isSuccessful ? 'alert-success' : 'alert-danger']"
+        class="alert"
+        role="alert"
+      >
+        {{ messageDisplay }}
       </div>
 
       <div class="wrap-input100 validate-input m-b-16">
@@ -76,7 +78,7 @@ export default {
         this.$router.push({ name: 'Dashboard' });
       } catch (error) {
         this.showMessage({
-          error: error?.response?.data?.message ?? 'Something Wrong!!!',
+          message: error?.response?.data?.message ?? 'Something Wrong!!!',
         });
       }
     },

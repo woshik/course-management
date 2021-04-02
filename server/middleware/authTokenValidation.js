@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { ObjectId } = require('mongodb');
+const { getUser } = require('../app/model/user');
 
 module.exports = (req, res, next) => {
   const token = req.header('X-Auth-Token');
@@ -8,13 +9,18 @@ module.exports = (req, res, next) => {
     return res.status(401).json({ message: 'Access Denied' });
   }
 
-  jwt.verify(token, process.env.SECRET_TOKEN, (err, decoded) => {
+  jwt.verify(token, process.env.SECRET_TOKEN, async (err, decoded) => {
     if (err) {
       res.status(401).send({ message: 'Invalid token' });
       return;
     }
 
-    req.user = { id: ObjectId(decoded.id) };
-    next();
+    try {
+      const userData = await getUser({ _id: ObjectId(decoded.id) }, {});
+      req.user = userData;
+      next();
+    } catch (error) {
+      next(error);
+    }
   });
 };

@@ -2,8 +2,13 @@
   <div class="row">
     <div class="outer-w3-agile col-xl mt-3">
       <h4 class="tittle-w3-agileits mb-4">{{ formLabel }} Student</h4>
-      <div v-if="errorMessage" class="alert alert-danger" role="alert">
-        {{ errorMessage }}
+      <div
+        v-if="messageDisplay"
+        class="alert"
+        :class="[isSuccessful ? 'alert-success' : 'alert-danger']"
+        role="alert"
+      >
+        {{ messageDisplay }}
       </div>
       <form @submit.prevent="submit">
         <div class="form-group">
@@ -41,6 +46,18 @@
             placeholder="Email"
             autocomplete="off"
             v-model.trim="email"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="text"
+            class="form-control"
+            id="password"
+            value="123456"
+            autocomplete="off"
+            disabled
           />
         </div>
 
@@ -85,7 +102,7 @@ export default {
         }
       } catch (error) {
         this.showMessage({
-          error: error?.response?.data?.message ?? 'Something Wrong!!!',
+          message: error?.response?.data?.message ?? 'Something Wrong!!!',
         });
       }
     },

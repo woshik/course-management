@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { getUserByEmail, userRegistration } = require('../model/user');
+const { getUser, userRegistration } = require('../model/user');
 
 const login = async (req, res, next) => {
   const { email, password } = req.routeData;
 
-  const userData = await getUserByEmail(email, {});
+  const userData = await getUser({ email }, {});
 
   if (!userData) {
     return res.status(400).json({ message: 'Wrong email address' });
@@ -32,10 +32,10 @@ const login = async (req, res, next) => {
   }
 };
 
-const registration = async (req, res, next) => {
+const registration = async (req, res) => {
   const userData = { ...req.routeData, active: false };
 
-  const userExist = await getUserByEmail(userData.email);
+  const userExist = await getUser({ email: userData.email });
 
   if (userExist) {
     return res.status(400).json({ message: 'Email already exists' });
@@ -44,15 +44,13 @@ const registration = async (req, res, next) => {
   const hashedPassword = await bcrypt.hash(req.body.password, await bcrypt.genSalt(10));
 
   userData.password = hashedPassword;
-  userData.role = 'user';
+  userData.role = 'student';
   delete userData.confirmPassword;
 
-  const inserted = await userRegistration(userData);
-
-  if (inserted) {
+  if (await userRegistration(userData)) {
     res.json({ success: true });
   } else {
-    next();
+    res.json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
 

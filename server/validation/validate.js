@@ -1,11 +1,21 @@
 const Joi = require('joi');
 
-const validate = (validationRules) => (req, res, next) => {
-  const joiSchema = Joi.object(validationRules);
+const validate = (...validationRules) => {
+  let allRules = {};
 
-  req.validationResult = joiSchema.validate(req.routeData);
+  validationRules.forEach((rule) => {
+    allRules = {
+      ...allRules,
+      ...rule,
+    };
+  });
 
-  next();
+  return (req, res, next) => {
+    const joiSchema = Joi.object(allRules);
+    req.validationResult = joiSchema.validate(req.routeData);
+
+    next();
+  };
 };
 
 module.exports = validate;

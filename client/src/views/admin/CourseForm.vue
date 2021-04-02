@@ -1,9 +1,14 @@
 <template>
   <div class="row">
     <div class="outer-w3-agile col-xl mt-3">
-      <h4 class="tittle-w3-agileits mb-4">{{formLabel}} Course</h4>
-       <div v-if="errorMessage" class="alert alert-danger" role="alert">
-        {{ errorMessage }}
+      <h4 class="tittle-w3-agileits mb-4">{{ formLabel }} Course</h4>
+      <div
+        v-if="messageDisplay"
+        class="alert"
+        :class="[isSuccessful ? 'alert-success' : 'alert-danger']"
+        role="alert"
+      >
+        {{ messageDisplay }}
       </div>
       <form @submit.prevent="submit">
         <div class="form-group">
@@ -30,7 +35,7 @@
           />
         </div>
 
-        <button type="submit" class="btn btn-primary">{{formLabel}}</button>
+        <button type="submit" class="btn btn-primary">{{ formLabel }}</button>
       </form>
     </div>
   </div>
@@ -66,11 +71,15 @@ export default {
           this.$router.push({ name: 'Course' });
         } else {
           await this.CourseService.add(this.formData);
-          this.$router.push({ name: 'Course' });
+          this.resetAll();
+          this.showMessage({
+            success: true,
+            message: 'Course successfully added.',
+          });
         }
       } catch (error) {
         this.showMessage({
-          error: error?.response?.data?.message ?? 'Something Wrong!!!',
+          message: error?.response?.data?.message ?? 'Something Wrong!!!',
         });
       }
     },

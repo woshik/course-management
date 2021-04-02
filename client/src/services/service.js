@@ -22,6 +22,13 @@ export default class Service {
     }).then((result) => result);
   }
 
+  getTotalCount() {
+    return request({
+      url: `${this.apiURL}/count`,
+      method: 'get',
+    }).then((result) => result);
+  }
+
   getById(id) {
     return request({
       url: `${this.apiURL}/${id}`,
@@ -29,11 +36,11 @@ export default class Service {
     }).then((result) => result);
   }
 
-  update(id, params) {
+  update(id, data) {
     return request({
       url: `${this.apiURL}/${id}`,
       method: 'patch',
-      params,
+      data,
     }).then((result) => result);
   }
 

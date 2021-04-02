@@ -14,7 +14,7 @@
     </div>
 
     <ul class="list-unstyled components">
-      <li v-for="item in getMenu" :key="item.id">
+      <li v-for="item in getMenu" :key="item.id" :class="{active: getActiveMenu(item.routeName)}">
         <router-link :to="{ name: item.routeName }">
           <font-awesome-icon :icon="item.icon" />
           {{ item.name }}
@@ -66,6 +66,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    getActiveMenu(name) {
+      return name === this.$route.meta.active;
+    },
   },
   computed: {
     getMenu() {

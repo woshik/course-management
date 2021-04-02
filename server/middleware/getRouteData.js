@@ -7,6 +7,7 @@ const getRouteData = (req, res, next) => {
       break;
     case 'POST':
     case 'PUT':
+    case 'PATCH':
     case 'UPDATE':
     case 'DELETE':
       params = { ...req.body, ...req.params };

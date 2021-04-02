@@ -6,9 +6,10 @@ const {
   removeStudentData,
   getStudentById,
   editStudent,
+  totalCount: studentCount,
 } = require('../model/student');
 
-const add = async (req, res, next) => {
+const add = async (req, res) => {
   const userData = { ...req.routeData, active: false };
 
   const userExist = await getStudentDataByEmail(userData.email);
@@ -17,17 +18,15 @@ const add = async (req, res, next) => {
     return res.status(400).json({ message: 'Email already exists' });
   }
 
-  const hashedPassword = await bcrypt.hash('test123', await bcrypt.genSalt(10));
+  const hashedPassword = await bcrypt.hash('123456', await bcrypt.genSalt(10));
 
   userData.password = hashedPassword;
-  userData.role = 'user';
+  userData.role = 'student';
 
-  const inserted = await addStudent(userData);
-
-  if (inserted) {
+  if (await addStudent(userData)) {
     res.json({ success: true });
   } else {
-    next();
+    res.json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
 
@@ -35,11 +34,11 @@ const getData = async (req, res) => {
   res.json(await getStudentsData(req.routeData));
 };
 
-const remove = async (req, res, next) => {
+const remove = async (req, res) => {
   if (await removeStudentData(req.routeData)) {
     res.json({ success: true });
   } else {
-    next();
+    res.json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
 
@@ -47,13 +46,15 @@ const getDataById = async (req, res) => {
   res.json(await getStudentById(req.routeData));
 };
 
-const edit = async (req, res, next) => {
+const edit = async (req, res) => {
   if (await editStudent(req.routeData)) {
     res.json({ success: true });
   } else {
-    next();
+    res.json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
+
+const totalCount = async (req, res) => res.json({ count: await studentCount() });
 
 module.exports = {
   add,
@@ -61,4 +62,5 @@ module.exports = {
   remove,
   getDataById,
   edit,
+  totalCount,
 };

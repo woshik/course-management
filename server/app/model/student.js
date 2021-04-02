@@ -5,7 +5,7 @@ const { asyncFunction } = require('../../utils/async');
 const getStudentDataByEmail = asyncFunction(async (email, projection = {
   _id: 0,
 }) => {
-  const students = await getDB().collection('students');
+  const students = await getDB().collection('users');
 
   const course = await students.findOne({
     email,
@@ -17,7 +17,7 @@ const getStudentDataByEmail = asyncFunction(async (email, projection = {
 });
 
 const addStudent = asyncFunction(async (courseData) => {
-  const students = await getDB().collection('students');
+  const students = await getDB().collection('users');
 
   const course = await students.insertOne(courseData);
 
@@ -25,9 +25,10 @@ const addStudent = asyncFunction(async (courseData) => {
 });
 
 const getStudentsData = asyncFunction(async (query) => {
-  const students = await getDB().collection('students');
+  const students = await getDB().collection('users');
 
   const where = {
+    role: 'student',
     $or: [
       {
         fullName: RegExp(`.*${query?.search_keyword ?? ''}.*`, 'i'),
@@ -53,7 +54,7 @@ const getStudentsData = asyncFunction(async (query) => {
 });
 
 const removeStudentData = asyncFunction(async ({ id }) => {
-  const students = await getDB().collection('students');
+  const students = await getDB().collection('users');
 
   const result = await students.deleteOne({
     _id: id,
@@ -63,7 +64,7 @@ const removeStudentData = asyncFunction(async ({ id }) => {
 });
 
 const getStudentById = asyncFunction(async ({ id }) => {
-  const students = await getDB().collection('students');
+  const students = await getDB().collection('users');
 
   const result = await students.findOne({
     _id: id,
@@ -73,15 +74,24 @@ const getStudentById = asyncFunction(async ({ id }) => {
 });
 
 const editStudent = asyncFunction(async ({ id, courseName, courseCode }) => {
-  const students = await getDB().collection('students');
+  const students = await getDB().collection('users');
 
   const result = await students.updateOne({ _id: id },
     {
       $set: {
-        courseName, courseCode,
+        courseName,
+        courseCode,
       },
     });
 
+  return result;
+});
+
+const totalCount = asyncFunction(async () => {
+  const students = await getDB().collection('users');
+  const result = await students.countDocuments({
+    role: 'student',
+  });
   return result;
 });
 
@@ -92,4 +102,5 @@ module.exports = {
   removeStudentData,
   getStudentById,
   editStudent,
+  totalCount,
 };

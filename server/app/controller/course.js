@@ -1,8 +1,14 @@
 const {
-  getCourseDataByCode, addCourse, getCoursesData, removeCoursesData, getCoursesById, editCourses,
+  getCourseDataByCode,
+  addCourse,
+  getCoursesData,
+  removeCoursesData,
+  getCoursesById,
+  editCourses,
+  totalCount: courseCount,
 } = require('../model/course');
 
-const add = async (req, res, next) => {
+const add = async (req, res) => {
   const { courseCode } = req.routeData;
 
   const courseData = await getCourseDataByCode(courseCode);
@@ -14,19 +20,17 @@ const add = async (req, res, next) => {
   if (await addCourse(req.routeData)) {
     res.json({ success: true });
   } else {
-    next();
+    res.json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
 
-const getData = async (req, res) => {
-  res.json(await getCoursesData(req.routeData));
-};
+const getData = async (req, res) => res.json(await getCoursesData(req.routeData));
 
-const remove = async (req, res, next) => {
+const remove = async (req, res) => {
   if (await removeCoursesData(req.routeData)) {
     res.json({ success: true });
   } else {
-    next();
+    res.json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
 
@@ -34,13 +38,15 @@ const getCourseById = async (req, res) => {
   res.json(await getCoursesById(req.routeData));
 };
 
-const edit = async (req, res, next) => {
+const edit = async (req, res) => {
   if (await editCourses(req.routeData)) {
     res.json({ success: true });
   } else {
-    next();
+    res.json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
+
+const totalCount = async (req, res) => res.json({ count: await courseCount() });
 
 module.exports = {
   add,
@@ -48,4 +54,5 @@ module.exports = {
   remove,
   getCourseById,
   edit,
+  totalCount,
 };
