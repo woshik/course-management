@@ -13,12 +13,11 @@
         @delete-row="deleteRow"
         @api-call="callToAPi"
       >
-        <button
-          class="btn btn-success btn-sm m-1"
-          @click="assignCourse(rowData)"
-        >
+      <template v-slot:default="{rowData}">
+        <button class="btn btn-success btn-sm m-1" @click="assignCourse(rowData)">
           <font-awesome-icon icon="address-book" /> Assign Course
         </button>
+      </template>
       </vue-table>
     </div>
     <modal-window v-if="showModal" @open="handleModal">
@@ -95,6 +94,9 @@ export default {
     },
     handleModal(open) {
       this.showModal = open;
+    },
+    assignCourse(courseData) {
+      this.$router.push({ name: 'AssignCourse', params: { id: courseData._id } });
     },
   },
 };

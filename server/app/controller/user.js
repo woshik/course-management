@@ -29,7 +29,7 @@ const updatePassword = async (req, res) => {
         .json({ success: false, message: 'Operation fail, Try again later' });
     }
   } else {
-    return res.status(400).json({ message: 'Invalid current password' });
+    res.status(400).json({ message: 'Invalid current password' });
   }
 };
 

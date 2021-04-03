@@ -11,6 +11,13 @@ const addCourse = {
   }),
 };
 
+const assignCourse = {
+  ids: Joi.array().items(Joi.string().required()).messages({
+    'array.includesRequiredUnknowns': 'Student id not found',
+  }),
+};
+
 module.exports = {
   addCourse,
+  assignCourse,
 };

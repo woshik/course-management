@@ -26,7 +26,7 @@ const add = async (req, res) => {
   if (await addStudent(userData)) {
     res.json({ success: true });
   } else {
-    res.json({ success: false, message: 'Operation fail, Try again later' });
+    res.status(400).json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
 
@@ -38,7 +38,7 @@ const remove = async (req, res) => {
   if (await removeStudentData(req.routeData)) {
     res.json({ success: true });
   } else {
-    res.json({ success: false, message: 'Operation fail, Try again later' });
+    res.status(400).json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
 
@@ -50,7 +50,7 @@ const edit = async (req, res) => {
   if (await editStudent(req.routeData)) {
     res.json({ success: true });
   } else {
-    res.json({ success: false, message: 'Operation fail, Try again later' });
+    res.status(400).json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
 

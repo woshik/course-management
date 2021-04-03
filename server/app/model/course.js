@@ -82,13 +82,54 @@ const editCourses = asyncFunction(async ({ id, courseName, courseCode }) => {
       },
     });
 
-  return result;
+  return result.modifiedCount === 1;
 });
 
 const totalCount = asyncFunction(async () => {
   const courses = await getDB().collection('courses');
   const result = await courses.countDocuments();
   return result;
+});
+
+const assign = asyncFunction(async (id, ids) => {
+  const courses = await getDB().collection('courses');
+
+  const result = await courses.updateOne({ _id: id }, {
+    $set: {
+      student: ids,
+    },
+  });
+
+  return result.modifiedCount === 1;
+});
+
+const getStudents = asyncFunction(async (id) => {
+  const courses = await getDB().collection('courses');
+
+  const result = await courses.aggregate([
+    {
+      $match: { _id: id },
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'student',
+        foreignField: '_id',
+        as: 'student_details',
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        student: 0,
+        courseCode: 0,
+        courseName: 0,
+        student_details: { password: 0 },
+      },
+    },
+  ]).toArray();
+
+  return result[0] ? result[0] : result;
 });
 
 module.exports = {
@@ -99,4 +140,6 @@ module.exports = {
   getCoursesById,
   editCourses,
   totalCount,
+  assign,
+  getStudents,
 };

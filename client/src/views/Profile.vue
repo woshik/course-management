@@ -1,34 +1,38 @@
 <template>
   <div>
-    <div class="outer-w3-agile col-xl mt-3">
-      <h4 class="tittle-w3-agileits mb-4">Update Profile</h4>
-      <div
-        v-if="messageDisplay"
-        class="alert"
-        :class="[isSuccessful ? 'alert-success' : 'alert-danger']"
-        role="alert"
-      >
-        {{ messageDisplay }}
+    <div class="row">
+      <div class="outer-w3-agile col-xl mt-3">
+        <h4 class="tittle-w3-agileits mb-4">Update Profile</h4>
+        <div
+          v-if="messageDisplay"
+          class="alert"
+          :class="[isSuccessful ? 'alert-success' : 'alert-danger']"
+          role="alert"
+        >
+          {{ messageDisplay }}
+        </div>
+        <form @submit.prevent="formSubmit">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Full Name</label>
+            <input type="text" v-model="fullName" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Email</label>
+            <input type="text" :value="getUserEmail" class="form-control" disabled />
+          </div>
+
+          <div class="form-group" v-if="getUserRole === 'student'">
+            <label for="exampleFormControlInput1">Date of Birth</label>
+            <input type="text" class="form-control" v-model="dob" />
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Update</button>
+        </form>
       </div>
-      <form @submit.prevent="formSubmit">
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Full Name</label>
-          <input type="text" v-model="fullName" class="form-control" />
-        </div>
-
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Email</label>
-          <input type="text" :value="getUserEmail" class="form-control" disabled />
-        </div>
-
-        <div class="form-group" v-if="getUserRole === 'student'">
-          <label for="exampleFormControlInput1">Date of Birth</label>
-          <input type="text" class="form-control" v-model="dob" />
-        </div>
-        <button type="submit" class="btn btn-primary mt-3">Update</button>
-      </form>
     </div>
-    <password-form />
+    <div class="row">
+      <password-form />
+    </div>
   </div>
 </template>
 

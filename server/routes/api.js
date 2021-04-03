@@ -6,6 +6,7 @@ const {
   validateId,
   userInfo,
   userPassword,
+  assignCourse,
 } = require('../validation/index');
 const {
   authTokenValidation,
@@ -69,13 +70,36 @@ module.exports = {
       convertMongoObjectId,
     ],
   },
-
   addCourse: {
     url: '/course',
     method: 'post',
     controller: 'course',
     function: 'add',
     middleware: [authTokenValidation, permission('admin'), validate(addCourse)],
+  },
+  assignCourse: {
+    url: '/course/assign/:id',
+    method: 'post',
+    controller: 'course',
+    function: 'assignCourse',
+    middleware: [
+      authTokenValidation,
+      permission('admin'),
+      validate(validateId, assignCourse),
+      convertMongoObjectId,
+    ],
+  },
+  getAssignStudent: {
+    url: '/course/assign/:id',
+    method: 'get',
+    controller: 'course',
+    function: 'getAssignStudent',
+    middleware: [
+      authTokenValidation,
+      permission('admin'),
+      validate(validateId),
+      convertMongoObjectId,
+    ],
   },
   editCourse: {
     url: '/course/:id',

@@ -45,6 +45,9 @@ const getStudentsData = asyncFunction(async (query) => {
   const studentData = await students.find(where, {
     skip: currentPage * perPage,
     limit: perPage,
+    projection: {
+      password: 0,
+    },
   }).toArray();
 
   return {

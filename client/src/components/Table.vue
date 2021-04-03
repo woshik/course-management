@@ -26,7 +26,7 @@
       >
         <template v-slot:actions="{ rowData }">
           <div class="table-button-container">
-            <slot></slot>
+            <slot :rowData="rowData"></slot>
             <button
               class="btn btn-warning btn-sm m-1"
               @click="actionButton('edit-row', rowData)"

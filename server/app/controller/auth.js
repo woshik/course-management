@@ -50,7 +50,7 @@ const registration = async (req, res) => {
   if (await userRegistration(userData)) {
     res.json({ success: true });
   } else {
-    res.json({ success: false, message: 'Operation fail, Try again later' });
+    res.status(400).json({ success: false, message: 'Operation fail, Try again later' });
   }
 };
 

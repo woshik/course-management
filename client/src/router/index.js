@@ -61,6 +61,15 @@ const publicRoutes = [
         },
       },
       {
+        path: '/course/assign/:id',
+        name: 'AssignCourse',
+        component: () => import(/* webpackChunkName: "courseForm" */ '@/views/admin/CourseAssign.vue'),
+        meta: {
+          title: 'Assign Course',
+          active: 'Course',
+        },
+      },
+      {
         path: '/student',
         name: 'Student',
         component: () => import(/* webpackChunkName: "Student" */ '@/views/admin/Student.vue'),
