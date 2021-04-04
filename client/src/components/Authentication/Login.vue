@@ -79,7 +79,7 @@ export default {
       } catch (error) {
         this.showMessage({
           message: error?.response?.data?.message ?? 'Something Wrong!!!',
-        });
+        }, 5000);
       }
     },
   },

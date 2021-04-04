@@ -10,13 +10,17 @@
 
       <modal-window v-if="showModal" @open="handleModal">
         <template v-slot:title> Add Schedule </template>
-        <div v-if="showError" class="alert alert-danger" role="alert">
-          Please, fillup the form
+        <div
+          v-if="messageDisplay"
+          class="alert"
+          :class="[isSuccessful ? 'alert-success' : 'alert-danger']"
+          role="alert"
+        >
+          {{ messageDisplay }}
         </div>
         <div class="form-group">
           <label for="courseName">Course Name</label>
           <VSelect
-            label="courseName"
             :options="courseData"
             :filterable="false"
             @option:selected="selectedData"
@@ -64,9 +68,13 @@ import FullCalendar from '@fullcalendar/vue';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import CourseService from '@/services/course.service';
+import FromValidation from '@/mixins/FormValidation';
+
 import 'vue-select/dist/vue-select.css';
 
 export default {
+  name: 'Schedule',
+  mixins: [FromValidation],
   components: {
     FullCalendar, // make the <FullCalendar> tag available
     ModalWindow: () => import('@/components/Modal.vue'),
@@ -82,7 +90,6 @@ export default {
       startTime: '',
       endTime: '',
       description: '',
-      showError: false,
       calendarOptions: {
         plugins: [timeGridPlugin, interactionPlugin],
         handleWindowResize: true,
@@ -102,7 +109,6 @@ export default {
     handleModal(open) {
       this.showModal = open;
       if (open === false) {
-        this.showError = false;
         this.selectedCourse = null;
         this.startTime = null;
         this.endTime = null;
@@ -115,7 +121,10 @@ export default {
         try {
           loading(true);
           const response = await this.CourseService.get({ perPage: 5, search_keyword: search });
-          this.courseData = response.data;
+          this.courseData = response?.data?.map((course) => ({
+            ...course,
+            label: `${course.courseName } (${ course.courseName })`,
+          })) ?? [];
           loading(false);
         } catch (error) {
           this.courseData = [];
@@ -127,12 +136,21 @@ export default {
       this.selectedCourse = selectedData;
     },
     addCourseSchedule() {
+      console.log(this.startTime, this.endTime);
       if (this.selectedCourse && this.startTime && this.endTime) {
-        this.calendarOptions.events.push([]);
-        this.showError = false;
+        this.calendarOptions.events.push({
+          title: this.selectedCourse.label,
+          startTime: this.startTime,
+          endTime: this.endTime,
+          daysOfWeek: [0],
+          description: this.description ?? '',
+          editable: true,
+        });
         this.handleModal(false);
       } else {
-        this.showError = true;
+        this.showMessage({
+          message: 'Please, fillup the form',
+        });
       }
     },
   },

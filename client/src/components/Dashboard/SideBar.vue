@@ -56,6 +56,12 @@ export default {
           icon: 'calendar-alt',
           routeName: 'Schedule',
         },
+         {
+          id: 5,
+          name: 'Manage Attendance',
+          icon: 'clock',
+          routeName: 'Attendance',
+        },
       ],
       studentMenu: [
         {
@@ -159,7 +165,8 @@ export default {
   padding: 16px 10px;
   font-size: 0.95em;
   letter-spacing: 0.6px;
-  display: block;
+  display: flex;
+  align-items: center;
   color: #fff;
   font-weight: 400;
 }

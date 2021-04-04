@@ -15,6 +15,7 @@ import {
   faBookOpen,
   faWrench,
   faRedo,
+  faClock,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -32,6 +33,7 @@ library.add(
   faBookOpen,
   faWrench,
   faRedo,
+  faClock,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

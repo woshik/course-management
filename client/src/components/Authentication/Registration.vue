@@ -4,12 +4,12 @@
       <span class="login100-form-title">Registration</span>
 
       <div
-        v-if="openMessage"
-        :class="[success ? 'alert-primary' : 'alert-danger']"
+        v-if="messageDisplay"
         class="alert"
+        :class="[isSuccessful ? 'alert-success' : 'alert-danger']"
         role="alert"
       >
-        This is a primary alert—check it out!
+        {{ messageDisplay }}
       </div>
 
       <div class="wrap-input100 validate-input m-b-16">
@@ -120,12 +120,19 @@ export default {
     async submit() {
       try {
         await UserService.registration(this.formData);
-        this.$route.push({ name: 'UserLogin' });
+        this.resetAll();
+        this.showMessage({
+          success: true,
+          message: 'Registration Complete',
+        });
+        setTimeout(() => {
+          this.$router.push({ name: 'UserLogin' });
+        }, 2000);
       } catch (error) {
-        this.success = false;
+        this.showMessage({
+          message: error?.response?.data?.message ?? 'Something Wrong!!!',
+        });
       }
-
-      this.showMessage();
     },
   },
 };

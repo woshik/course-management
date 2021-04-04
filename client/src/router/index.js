@@ -27,7 +27,7 @@ const publicRoutes = [
       {
         path: '',
         name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "AdminDashboard" */ '@/views/admin/Dashboard.vue'),
+        component: () => import(/* webpackChunkName: "Dashboard" */ '@/views/Dashboard.vue'),
         meta: {
           title: 'Dashboard',
           active: 'Dashboard',
@@ -115,6 +115,15 @@ const publicRoutes = [
         },
       },
       {
+        path: '/attendance',
+        name: 'Attendance',
+        component: () => import(/* webpackChunkName: "Attendance" */ '@/views/admin/Attendance.vue'),
+        meta: {
+          title: 'Manage Schedule',
+          active: 'Attendance',
+        },
+      },
+      {
         path: '/profile',
         name: 'Profile',
         component: () => import(/* webpackChunkName: "Profile" */ '@/views/Profile.vue'),
@@ -127,17 +136,17 @@ const publicRoutes = [
 ];
 
 const createRouter = () => new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: publicRoutes,
-  scrollBehavior: (to, from, savedPosition) => {
-    if (savedPosition) {
-      return savedPosition;
-    }
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: publicRoutes,
+    scrollBehavior: (to, from, savedPosition) => {
+      if (savedPosition) {
+        return savedPosition;
+      }
 
-    return { x: 0, y: 0 };
-  },
-});
+      return { x: 0, y: 0 };
+    },
+  });
 
 const router = createRouter();
 
