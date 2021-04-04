@@ -63,7 +63,7 @@ const publicRoutes = [
       {
         path: '/course/assign/:id',
         name: 'AssignCourse',
-        component: () => import(/* webpackChunkName: "courseForm" */ '@/views/admin/CourseAssign.vue'),
+        component: () => import(/* webpackChunkName: "AssignCourse" */ '@/views/admin/CourseAssign.vue'),
         meta: {
           title: 'Assign Course',
           active: 'Course',
@@ -97,9 +97,18 @@ const publicRoutes = [
         },
       },
       {
+        path: '/student/details/:id',
+        name: 'StudentDetails',
+        component: () => import(/* webpackChunkName: "StudentDetails" */ '@/views/admin/StudentDetails.vue'),
+        meta: {
+          title: 'Student Details',
+          active: 'Student',
+        },
+      },
+      {
         path: '/schedule',
         name: 'Schedule',
-        component: () => import(/* webpackChunkName: "StudentForm" */ '@/views/admin/Schedule.vue'),
+        component: () => import(/* webpackChunkName: "Schedule" */ '@/views/admin/Schedule.vue'),
         meta: {
           title: 'Manage Schedule',
           active: 'Schedule',

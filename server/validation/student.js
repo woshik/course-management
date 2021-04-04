@@ -17,6 +17,18 @@ const addStudent = {
     }),
 };
 
+const updateStudent = {
+  fullName: Joi.string().min(3).required().messages({
+    'any.required': 'Full name is required',
+    'string.empty': 'Full name is required',
+    'string.min': 'Full name must be at least 3 characters long',
+  }),
+  dob: Joi.date().required().messages({
+    'date.base': 'Date of birth must be a valid date',
+  }),
+};
+
 module.exports = {
   addStudent,
+  updateStudent,
 };

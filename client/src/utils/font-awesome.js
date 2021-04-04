@@ -13,6 +13,8 @@ import {
   faUserGraduate,
   faCalendarAlt,
   faBookOpen,
+  faWrench,
+  faRedo,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -28,6 +30,8 @@ library.add(
   faUserGraduate,
   faCalendarAlt,
   faBookOpen,
+  faWrench,
+  faRedo,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

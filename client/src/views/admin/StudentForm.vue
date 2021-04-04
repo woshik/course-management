@@ -37,7 +37,7 @@
           />
         </div>
 
-        <div class="form-group">
+        <div v-if="!isEditPage" class="form-group">
           <label for="email">Email</label>
           <input
             type="text"
@@ -46,10 +46,11 @@
             placeholder="Email"
             autocomplete="off"
             v-model.trim="email"
+            :disabled="isEditPage"
           />
         </div>
 
-        <div class="form-group">
+        <div v-if="!isEditPage" class="form-group">
           <label for="password">Password</label>
           <input
             type="text"
@@ -84,21 +85,30 @@ export default {
   },
   formFields: ['fullName', 'dob', 'email'],
   async mounted() {
-    if (this.$route.params.id) {
-      const { courseName, courseCode } = await this.StudentService.getById(this.$route.params.id);
-      this.courseName = courseName;
-      this.courseCode = courseCode;
+    if (this.isEditPage) {
+      try {
+        const { fullName, dob } = await this.StudentService.getById(this.$route.params.id);
+        const date = new Date(dob);
+        this.fullName = fullName;
+        this.dob = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      } catch (error) {
+        console.log(error);
+      }
     }
   },
   methods: {
     async submit() {
       try {
-        if (this.$route.params.id) {
+        if (this.isEditPage) {
           await this.StudentService.update(this.$route.params.id, this.formData);
           this.$router.push({ name: 'Student' });
         } else {
           await this.StudentService.add(this.formData);
-          this.$router.push({ name: 'Student' });
+          this.resetAll();
+          this.showMessage({
+            success: true,
+            message: 'Student successfully added.',
+          });
         }
       } catch (error) {
         this.showMessage({
@@ -116,6 +126,9 @@ export default {
   computed: {
     formLabel() {
       return this.$route.params.id ? 'Edit' : 'Add';
+    },
+    isEditPage() {
+      return !!this.$route.params.id;
     },
   },
 };

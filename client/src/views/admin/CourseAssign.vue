@@ -57,8 +57,7 @@ export default {
       const response = await this.CourseService.getAssignStudnet(this.$route.params.id);
       this.selectedValue = response?.student_details?.map((student) => ({
         _id: student._id,
-        // eslint-disable-next-line prefer-template
-        label: student.fullName + ' (' + student.email + ')',
+        label: `${student.fullName} (${student.email})`,
         email: student.email,
       })) ?? [];
     } catch (error) {

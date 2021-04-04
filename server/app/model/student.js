@@ -58,6 +58,11 @@ const getStudentsData = asyncFunction(async (query) => {
 
 const removeStudentData = asyncFunction(async ({ id }) => {
   const students = await getDB().collection('users');
+  const courses = await getDB().collection('courses');
+
+  courses.updateMany({}, {
+    $pull: { student: id },
+  });
 
   const result = await students.deleteOne({
     _id: id,
@@ -76,14 +81,14 @@ const getStudentById = asyncFunction(async ({ id }) => {
   return result;
 });
 
-const editStudent = asyncFunction(async ({ id, courseName, courseCode }) => {
+const editStudent = asyncFunction(async ({ id, fullName, dob }) => {
   const students = await getDB().collection('users');
 
   const result = await students.updateOne({ _id: id },
     {
       $set: {
-        courseName,
-        courseCode,
+        fullName,
+        dob,
       },
     });
 
@@ -98,6 +103,64 @@ const totalCount = asyncFunction(async () => {
   return result;
 });
 
+const editStudentStatus = asyncFunction(async ({ id }) => {
+  const students = await getDB().collection('users');
+
+  const student = await students.findOne({
+    _id: id,
+  });
+
+  const result = await students.updateOne({ _id: id },
+    {
+      $set: {
+        active: !student.active,
+      },
+    });
+
+  return result.modifiedCount === 1;
+});
+
+const getStudentAndCourseData = asyncFunction(async ({ id }) => {
+  const students = await getDB().collection('users');
+  const result = await students.aggregate([
+    {
+      $match: { _id: id },
+    },
+    {
+      $lookup: {
+        from: 'courses',
+        localField: '_id',
+        foreignField: 'student',
+        as: 'courses_details',
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        password: 0,
+        active: 0,
+        role: 0,
+        courses_details: { _id: 0, student: 0 },
+      },
+    },
+  ]).toArray();
+
+  return result[0] ? result[0] : result;
+});
+
+const resetStudentPassword = asyncFunction(async ({ id, password }) => {
+  const students = await getDB().collection('users');
+
+  const result = await students.updateOne({ _id: id },
+    {
+      $set: {
+        password,
+      },
+    });
+
+  return result.modifiedCount === 1;
+});
+
 module.exports = {
   getStudentDataByEmail,
   getStudentsData,
@@ -106,4 +169,7 @@ module.exports = {
   getStudentById,
   editStudent,
   totalCount,
+  editStudentStatus,
+  getStudentAndCourseData,
+  resetStudentPassword,
 };

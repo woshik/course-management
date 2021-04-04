@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const { login, registration } = require('./auth');
 const { addCourse, assignCourse } = require('./course');
-const { addStudent } = require('./student');
+const { addStudent, updateStudent } = require('./student');
 const { userInfo, userPassword } = require('./user');
 
 const validateId = {
@@ -20,4 +20,5 @@ module.exports = {
   userInfo,
   userPassword,
   assignCourse,
+  updateStudent,
 };

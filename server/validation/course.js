@@ -12,7 +12,7 @@ const addCourse = {
 };
 
 const assignCourse = {
-  ids: Joi.array().items(Joi.string().required()).messages({
+  ids: Joi.array().items(Joi.string()).messages({
     'array.includesRequiredUnknowns': 'Student id not found',
   }),
 };

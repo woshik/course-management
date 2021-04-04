@@ -7,6 +7,7 @@ const {
   userInfo,
   userPassword,
   assignCourse,
+  updateStudent,
 } = require('../validation/index');
 const {
   authTokenValidation,
@@ -167,6 +168,42 @@ module.exports = {
     method: 'patch',
     controller: 'student',
     function: 'edit',
+    middleware: [
+      authTokenValidation,
+      permission('admin'),
+      validate(validateId, updateStudent),
+      convertMongoObjectId,
+    ],
+  },
+  studentAndCourseData: {
+    url: '/student/course/:id',
+    method: 'get',
+    controller: 'student',
+    function: 'getStudentAndCourseDataById',
+    middleware: [
+      authTokenValidation,
+      permission('admin'),
+      validate(validateId),
+      convertMongoObjectId,
+    ],
+  },
+  changeStudentStatus: {
+    url: '/student/status/:id',
+    method: 'patch',
+    controller: 'student',
+    function: 'updateStatus',
+    middleware: [
+      authTokenValidation,
+      permission('admin'),
+      validate(validateId),
+      convertMongoObjectId,
+    ],
+  },
+  resetPassword: {
+    url: '/student/reset/:id',
+    method: 'post',
+    controller: 'student',
+    function: 'resetPassword',
     middleware: [
       authTokenValidation,
       permission('admin'),

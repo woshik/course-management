@@ -30,7 +30,9 @@ const FormValidation = {
     formData() {
       const data = {};
       this.$options.formFields.forEach((key) => {
-        data[key] = this.$data[key];
+        if (this.$data[key]) {
+          data[key] = this.$data[key];
+        }
       });
       return data;
     },
