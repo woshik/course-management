@@ -14,6 +14,10 @@ const login = async (req, res, next) => {
   const isMatch = await bcrypt.compare(password, userData.password);
 
   if (isMatch) {
+    if (userData.role === 'student' && userData.active === false) {
+      return res.status(400).json({ message: 'Please talk with Admin, You account not yet activated.' });
+    }
+
     delete userData.password;
 
     jwt.sign({ id: userData._id }, process.env.SECRET_TOKEN, (err, token) => {

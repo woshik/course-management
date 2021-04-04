@@ -21,6 +21,7 @@ const registration = {
     'string.min': 'Full name must be at least 3 characters long',
   }),
   dob: Joi.date().required().messages({
+    'any.required': 'Date of birth must be a valid date',
     'date.base': 'Date of birth must be a valid date',
   }),
   email: Joi.string().email().lowercase().required()

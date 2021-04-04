@@ -44,6 +44,9 @@ const getCoursesData = asyncFunction(async (query) => {
   const courseData = await courses.find(where, {
     skip: currentPage * perPage,
     limit: perPage,
+    projection: {
+      student: 0,
+    },
   }).toArray();
 
   return {
@@ -67,6 +70,10 @@ const getCoursesById = asyncFunction(async ({ id }) => {
 
   const result = await courses.findOne({
     _id: id,
+  }, {
+    projection: {
+      student: 0,
+    },
   });
 
   return result;
