@@ -3,9 +3,7 @@ const cluster = require('cluster');
 
 // clustering only apply on production server
 if (cluster.isMaster) {
-  require('dotenv').config({
-    debug: process.env.NODE_ENV !== 'production',
-  });
+  require('dotenv').config();
 
   console.log(`Application Environment: ${process.env.NODE_ENV}`);
 

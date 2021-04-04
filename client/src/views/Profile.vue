@@ -58,8 +58,9 @@ export default {
   formFields: ['fullName', 'dob'],
   mounted() {
     this.fullName = this.getUserFullName;
-    this.dob = this.getUserDob;
     this.email = this.getUserEmail;
+    const date = new Date(this.getUserDob);
+    this.dob = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
   },
   methods: {
     async formSubmit() {

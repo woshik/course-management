@@ -29,15 +29,15 @@ process.on('unhandledRejection', (error) => {
   process.exit(1);
 });
 
-if (fs.existsSync(__dirname, '../client/build')) {
-  server.use(express.static(resolve(__dirname, '../client/build')));
+if (process.env.NODE_ENV === 'production' && fs.existsSync(__dirname, '../client/build')) {
+  server.use('/js', express.static(resolve(__dirname, '../client/dist/js')));
 }
 
 // important middleware
 server
-// enable cors for server, Access-Control-Allow-Origin: *
+  // enable cors for server, Access-Control-Allow-Origin: *
   .use(cors())
-// secure the server with headers
+  // secure the server with headers
   .use(
     helmet({
       contentSecurityPolicy: false,
@@ -56,6 +56,12 @@ server.use(
   require('./routes/urlConfig')(require('./routes/api'), __dirname),
 );
 
+if (process.env.NODE_ENV === 'production') {
+  server.get('*', (req, res) => {
+    res.sendFile(resolve(__dirname, '../client/dist/index.html'));
+  });
+}
+
 // catch 404 and forward to error handler
 server.use((req, res) => {
   res.status(404).send("Sorry can't find that api!");
@@ -64,10 +70,6 @@ server.use((req, res) => {
 // error handler
 server.use((err, req, res) => {
   res.status(500).send('Something broke!');
-});
-
-server.get('*', (req, res) => {
-  res.sendFile(resolve(__dirname, '../client/build/index.html'));
 });
 
 connectWithMongodb(() => {
