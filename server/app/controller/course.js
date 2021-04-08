@@ -9,6 +9,9 @@ const {
   totalCount: courseCount,
   assign,
   getStudents,
+  createEvent,
+  getCourseEvents,
+  getStudentCourseEvents,
 } = require('../model/course');
 
 const add = async (req, res) => {
@@ -63,6 +66,28 @@ const assignCourse = async (req, res) => {
 
 const getAssignStudent = async (req, res) => res.json(await getStudents(req.routeData.id));
 
+const addEvents = async (req, res) => {
+  const { data } = req.routeData;
+  const database = {};
+  data.forEach((item) => {
+    if (!database[item.id]) {
+      database[item.id] = [];
+    }
+    const { id, ...info } = item;
+    database[item.id].push(info);
+  });
+
+  if (await createEvent(database)) {
+    res.json({ success: true });
+  } else {
+    res.status(400).json({ success: false, message: 'Operation fail, Try again later' });
+  }
+};
+
+const getEvents = async (req, res) => res.json(await getCourseEvents());
+
+const getStudentEvents = async (req, res) => res.json(await getStudentCourseEvents(req.user._id));
+
 module.exports = {
   add,
   getData,
@@ -72,4 +97,7 @@ module.exports = {
   totalCount,
   assignCourse,
   getAssignStudent,
+  addEvents,
+  getEvents,
+  getStudentEvents,
 };

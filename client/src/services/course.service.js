@@ -22,4 +22,26 @@ export default class Course extends Service {
       method: 'get',
     }).then((result) => result);
   }
+
+  addEvents(data) {
+    return request({
+      url: `${this.apiURL}/events`,
+      method: 'post',
+      data,
+    }).then((result) => result);
+  }
+
+  getEvents() {
+    return request({
+      url: `${this.apiURL}/events`,
+      method: 'get',
+    }).then((result) => result);
+  }
+
+  getEventsForStudent() {
+    return request({
+      url: `${this.apiURL}/events/student`,
+      method: 'get',
+    }).then((result) => result);
+  }
 }

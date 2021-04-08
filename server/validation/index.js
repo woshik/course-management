@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { login, registration } = require('./auth');
-const { addCourse, assignCourse } = require('./course');
+const { addCourse, assignCourse, courseEvents } = require('./course');
 const { addStudent, updateStudent } = require('./student');
 const { userInfo, userPassword } = require('./user');
 
@@ -21,4 +21,5 @@ module.exports = {
   userPassword,
   assignCourse,
   updateStudent,
+  courseEvents,
 };

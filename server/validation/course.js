@@ -17,7 +17,20 @@ const assignCourse = {
   }),
 };
 
+const courseEvents = {
+  data: Joi.array().items(Joi.object().keys({
+    id: Joi.string(),
+    title: Joi.string(),
+    startTime: Joi.string(),
+    endTime: Joi.string(),
+    daysOfWeek: Joi.number(),
+  })).required().messages({
+    'array.includesRequiredUnknowns': 'Student id not found',
+  }),
+};
+
 module.exports = {
   addCourse,
   assignCourse,
+  courseEvents,
 };

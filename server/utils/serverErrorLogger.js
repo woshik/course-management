@@ -20,7 +20,6 @@ const logger = createLogger({
   ],
 });
 
-// console.log error only development
 logger.add(
   new transports.Console({
     format: format.combine(

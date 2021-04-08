@@ -8,6 +8,7 @@ const {
   userPassword,
   assignCourse,
   updateStudent,
+  courseEvents,
 } = require('../validation/index');
 const {
   authTokenValidation,
@@ -52,6 +53,13 @@ module.exports = {
     function: 'getData',
     middleware: [authTokenValidation, permission('admin')],
   },
+  addCourse: {
+    url: '/course',
+    method: 'post',
+    controller: 'course',
+    function: 'add',
+    middleware: [authTokenValidation, permission('admin'), validate(addCourse)],
+  },
   getCourseCount: {
     url: '/course/count',
     method: 'get',
@@ -59,24 +67,33 @@ module.exports = {
     function: 'totalCount',
     middleware: [authTokenValidation, permission('admin')],
   },
-  getCourseById: {
-    url: '/course/:id',
+  getCourseEvent: {
+    url: '/course/events',
     method: 'get',
     controller: 'course',
-    function: 'getCourseById',
+    function: 'getEvents',
+    middleware: [authTokenValidation, permission('admin')],
+  },
+  addCourseEvent: {
+    url: '/course/events',
+    method: 'post',
+    controller: 'course',
+    function: 'addEvents',
     middleware: [
       authTokenValidation,
       permission('admin'),
-      validate(validateId),
-      convertMongoObjectId,
+      validate(courseEvents),
     ],
   },
-  addCourse: {
-    url: '/course',
-    method: 'post',
+  getCourseEventForStudent: {
+    url: '/course/events/student',
+    method: 'get',
     controller: 'course',
-    function: 'add',
-    middleware: [authTokenValidation, permission('admin'), validate(addCourse)],
+    function: 'getStudentEvents',
+    middleware: [
+      authTokenValidation,
+      permission('student'),
+    ],
   },
   assignCourse: {
     url: '/course/assign/:id',
@@ -95,6 +112,18 @@ module.exports = {
     method: 'get',
     controller: 'course',
     function: 'getAssignStudent',
+    middleware: [
+      authTokenValidation,
+      permission('admin'),
+      validate(validateId),
+      convertMongoObjectId,
+    ],
+  },
+  getCourseById: {
+    url: '/course/:id',
+    method: 'get',
+    controller: 'course',
+    function: 'getCourseById',
     middleware: [
       authTokenValidation,
       permission('admin'),
@@ -140,18 +169,7 @@ module.exports = {
     function: 'totalCount',
     middleware: [authTokenValidation, permission('admin')],
   },
-  getStudentById: {
-    url: '/student/:id',
-    method: 'get',
-    controller: 'student',
-    function: 'getDataById',
-    middleware: [
-      authTokenValidation,
-      permission('admin'),
-      validate(validateId),
-      convertMongoObjectId,
-    ],
-  },
+
   addStudent: {
     url: '/student',
     method: 'post',
@@ -163,18 +181,7 @@ module.exports = {
       validate(addStudent),
     ],
   },
-  editStudent: {
-    url: '/student/:id',
-    method: 'patch',
-    controller: 'student',
-    function: 'edit',
-    middleware: [
-      authTokenValidation,
-      permission('admin'),
-      validate(validateId, updateStudent),
-      convertMongoObjectId,
-    ],
-  },
+
   studentAndCourseData: {
     url: '/student/course/:id',
     method: 'get',
@@ -208,6 +215,30 @@ module.exports = {
       authTokenValidation,
       permission('admin'),
       validate(validateId),
+      convertMongoObjectId,
+    ],
+  },
+  getStudentById: {
+    url: '/student/:id',
+    method: 'get',
+    controller: 'student',
+    function: 'getDataById',
+    middleware: [
+      authTokenValidation,
+      permission('admin'),
+      validate(validateId),
+      convertMongoObjectId,
+    ],
+  },
+  editStudent: {
+    url: '/student/:id',
+    method: 'patch',
+    controller: 'student',
+    function: 'edit',
+    middleware: [
+      authTokenValidation,
+      permission('admin'),
+      validate(validateId, updateStudent),
       convertMongoObjectId,
     ],
   },

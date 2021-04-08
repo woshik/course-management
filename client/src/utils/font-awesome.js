@@ -16,6 +16,7 @@ import {
   faWrench,
   faRedo,
   faClock,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -34,6 +35,7 @@ library.add(
   faWrench,
   faRedo,
   faClock,
+  faTimes,
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
