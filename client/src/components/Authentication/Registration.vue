@@ -12,7 +12,7 @@
         {{ messageDisplay }}
       </div>
 
-      <div class="wrap-input100 validate-input m-b-16">
+      <div class="m-b-16">
         <input
           class="input100"
           type="text"
@@ -21,24 +21,18 @@
           autocomplete="off"
           v-model.trim="fullName"
         />
-        <span class="focus-input100"></span>
       </div>
 
-      <div class="wrap-input100 validate-input m-b-16">
-        <input
-          class="input100"
+      <div class="m-b-16">
+        <date-picker
+          v-model="dob"
+          input-class="input100"
+          format="DD-MM-YYYY"
           placeholder="Date of Birth"
-          type="text"
-          name="dob"
-          autocomplete="off"
-          v-model.trim="dob"
-          @focus="changeTextFieldToDate"
-          @blur="changeDateFieldToText"
         />
-        <span class="focus-input100"></span>
       </div>
 
-      <div class="wrap-input100 validate-input m-b-16">
+      <div class="m-b-16">
         <input
           class="input100"
           type="text"
@@ -47,10 +41,9 @@
           autocomplete="off"
           v-model.trim="email"
         />
-        <span class="focus-input100"></span>
       </div>
 
-      <div class="wrap-input100 validate-input m-b-16">
+      <div class="m-b-16">
         <input
           class="input100"
           type="password"
@@ -59,10 +52,9 @@
           autocomplete="off"
           v-model.trim="password"
         />
-        <span class="focus-input100"></span>
       </div>
 
-      <div class="wrap-input100 validate-input m-b-16">
+      <div class="m-b-16">
         <input
           class="input100"
           type="password"
@@ -71,7 +63,6 @@
           autocomplete="off"
           v-model.trim="confirmPassword"
         />
-        <span class="focus-input100"></span>
       </div>
 
       <div class="container-login100-form-btn p-b-40">
@@ -92,11 +83,15 @@
 <script>
 import UserService from '@/services/user.service';
 import FromValidation from '@/mixins/FormValidation';
+import DatePicker from 'vue2-datepicker';
 import Base from './Base.vue';
+
+import 'vue2-datepicker/index.css';
 
 export default {
   name: 'Registration',
   components: {
+    DatePicker,
     Base,
   },
   mixins: [FromValidation],
@@ -111,12 +106,6 @@ export default {
   },
   formFields: ['fullName', 'dob', 'email', 'password', 'confirmPassword'],
   methods: {
-    changeTextFieldToDate(e) {
-      e.target.type = 'date';
-    },
-    changeDateFieldToText(e) {
-      e.target.type = 'text';
-    },
     async submit() {
       try {
         await UserService.registration(this.formData);
@@ -204,37 +193,6 @@ input[type="number"]::-webkit-inner-spin-button {
 textarea {
   outline: none;
   border: none;
-}
-
-textarea:focus,
-input:focus {
-  border-color: transparent !important;
-}
-
-input::-webkit-input-placeholder {
-  color: #1b3815;
-}
-input:-moz-placeholder {
-  color: #1b3815;
-}
-input::-moz-placeholder {
-  color: #1b3815;
-}
-input:-ms-input-placeholder {
-  color: #1b3815;
-}
-
-textarea::-webkit-input-placeholder {
-  color: #1b3815;
-}
-textarea:-moz-placeholder {
-  color: #1b3815;
-}
-textarea::-moz-placeholder {
-  color: #1b3815;
-}
-textarea:-ms-input-placeholder {
-  color: #1b3815;
 }
 
 /*---------------------------------------------*/
@@ -339,12 +297,6 @@ iframe {
   vertical-align: middle;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ login ]*/
-
-/*==================================================================
-[ Form ]*/
-
 .limiter {
   width: 100%;
   margin: 0 auto;
@@ -401,62 +353,6 @@ iframe {
 }
 
 /*------------------------------------------------------------------
-[ Input ]*/
-
-.wrap-input100 {
-  width: 100%;
-  background-color: #fff;
-  border-radius: 27px;
-  position: relative;
-  z-index: 1;
-}
-
-.input100 {
-  font-family: Ubuntu-Bold;
-  font-size: 15px;
-  color: #1b3815;
-  line-height: 1.2;
-
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 55px;
-  background: #ebebeb;
-  border-radius: 27px;
-  padding: 0 35px 0 35px;
-}
-
-/*------------------------------------------------------------------
-[ Focus Input ]*/
-
-.focus-input100 {
-  display: block;
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%);
-  border-radius: 31px;
-  background-color: #ebebeb;
-  pointer-events: none;
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-}
-
-.input100:focus + .focus-input100 {
-  width: calc(100% + 20px);
-}
-
-/*------------------------------------------------------------------
 [ Button ]*/
 .container-login100-form-btn {
   width: 100%;
@@ -499,68 +395,6 @@ iframe {
   background-color: #1b3815;
 }
 
-/*------------------------------------------------------------------
-[ Alert validate ]*/
-
-.validate-input {
-  position: relative;
-}
-
-.alert-validate::before {
-  content: attr(data-validate);
-  position: absolute;
-  z-index: 1000;
-  max-width: 70%;
-  background-color: #fff;
-  border: 1px solid #c80000;
-  border-radius: 14px;
-  padding: 4px 25px 4px 10px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  right: 10px;
-  pointer-events: none;
-
-  font-family: Ubuntu-Bold;
-  color: #c80000;
-  font-size: 13px;
-  line-height: 1.4;
-  text-align: left;
-
-  visibility: hidden;
-  opacity: 0;
-
-  -webkit-transition: opacity 0.4s;
-  -o-transition: opacity 0.4s;
-  -moz-transition: opacity 0.4s;
-  transition: opacity 0.4s;
-}
-
-.alert-validate::after {
-  content: "\f06a";
-  font-family: FontAwesome;
-  display: block;
-  position: absolute;
-  z-index: 1100;
-  color: #c80000;
-  font-size: 16px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  right: 16px;
-}
-
-.alert-validate:hover:before {
-  visibility: visible;
-  opacity: 1;
-}
-
 @media (max-width: 992px) {
   .alert-validate::before {
     visibility: visible;
@@ -576,4 +410,32 @@ iframe {
     padding-right: 15px;
   }
 }
+</style>
+
+<style>
+.input100 {
+  font-family: Ubuntu-Bold;
+  font-size: 18px;
+  color: #1b3815;
+  line-height: 1.2;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 55px;
+  background: #ebebeb;
+  border-radius: 27px;
+  padding: 0 35px 0 35px;
+  outline: unset;
+  border: unset;
+}
+
+.mx-datepicker {
+  width: 100% !important;
+}
+
+.mx-icon-calendar,
+.mx-icon-clear {
+  right: 25px;
+}
+
 </style>

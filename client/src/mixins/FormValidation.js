@@ -11,12 +11,19 @@ const FormValidation = {
     showMessage(messageObj, time = 3000) {
       this.isSuccessful = messageObj.success;
       this.messageDisplay = messageObj.message;
+      const { ref } = messageObj;
 
+      if (ref) {
+        this.$refs[ref].style.display = 'block';
+      }
       clearTimeout(this.timer);
 
       this.timer = setTimeout(() => {
         this.isSuccessful = false;
         this.messageDisplay = '';
+        if (ref) {
+          this.$refs[ref].style.display = 'none';
+        }
       }, time);
     },
 

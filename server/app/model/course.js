@@ -166,22 +166,22 @@ const createEvent = asyncFunction(async (data) => {
 
   const ids = new Map();
 
-  if (Object.keys(data).length) {
-    const courseIds = await courses
-      .find(
-        {},
-        {
-          projection: {
-            _id: 1,
-          },
+  const courseIds = await courses
+    .find(
+      {
+        events: { $exists: true },
+      },
+      {
+        projection: {
+          _id: 1,
         },
-      )
-      .toArray();
+      },
+    )
+    .toArray();
 
-    courseIds.forEach((info) => {
-      ids.set(info._id.toString(), true);
-    });
-  }
+  courseIds.forEach((info) => {
+    ids.set(info._id.toString(), true);
+  });
 
   // eslint-disable-next-line no-restricted-syntax
   for (const key in data) {
@@ -201,18 +201,16 @@ const createEvent = asyncFunction(async (data) => {
     }
   }
 
-  if (Object.keys(data).length) {
-    ids.forEach((value, key) => {
-      courses.updateOne(
-        { _id: ObjectId(key) },
-        {
-          $unset: {
-            events: '',
-          },
+  ids.forEach((value, key) => {
+    courses.updateOne(
+      { _id: ObjectId(key) },
+      {
+        $unset: {
+          events: '',
         },
-      );
-    });
-  }
+      },
+    );
+  });
 
   return true;
 });

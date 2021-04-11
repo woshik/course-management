@@ -24,7 +24,13 @@
 
           <div class="form-group" v-if="getUserRole === 'student'">
             <label for="exampleFormControlInput1">Date of Birth</label>
-            <input type="text" class="form-control" v-model="dob" />
+            <date-picker
+              v-model="dob"
+              format="DD-MM-YYYY"
+              input-class="form-control"
+              placeholder="Date of Birth"
+            >
+            </date-picker>
           </div>
           <button type="submit" class="btn btn-primary mt-3">Update</button>
         </form>
@@ -40,12 +46,16 @@
 import UserService from '@/services/user.service';
 import FromValidation from '@/mixins/FormValidation';
 import PasswordForm from '@/components/PasswordForm.vue';
+import DatePicker from 'vue2-datepicker';
 import { mapGetters } from 'vuex';
+
+import 'vue2-datepicker/index.css';
 
 export default {
   name: 'Profile',
   mixins: [FromValidation],
   components: {
+    DatePicker,
     PasswordForm,
   },
   data() {
@@ -59,8 +69,9 @@ export default {
   mounted() {
     this.fullName = this.getUserFullName;
     this.email = this.getUserEmail;
-    const date = new Date(this.getUserDob);
-    this.dob = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    if (this.getUserRole === 'student') {
+      this.dob = new Date(this.getUserDob);
+    }
   },
   methods: {
     async formSubmit() {

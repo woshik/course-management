@@ -25,15 +25,11 @@
 
         <div class="form-group">
           <label for="dob">Date of Birth</label>
-          <input
-            type="text"
-            class="form-control"
-            id="dob"
+          <date-picker
+            v-model="dob"
+            input-class="form-control"
+            format="DD-MM-YYYY"
             placeholder="Date of Birth"
-            autocomplete="off"
-            v-model.trim="dob"
-            @focus="changeTextFieldToDate"
-            @blur="changeDateFieldToText"
           />
         </div>
 
@@ -71,10 +67,16 @@
 <script>
 import StudentService from '@/services/student.service';
 import FromValidation from '@/mixins/FormValidation';
+import DatePicker from 'vue2-datepicker';
+
+import 'vue2-datepicker/index.css';
 
 export default {
   name: 'StudentForm',
   mixins: [FromValidation],
+  components: {
+    DatePicker,
+  },
   data() {
     return {
       fullName: '',
@@ -88,9 +90,8 @@ export default {
     if (this.isEditPage) {
       try {
         const { fullName, dob } = await this.StudentService.getById(this.$route.params.id);
-        const date = new Date(dob);
         this.fullName = fullName;
-        this.dob = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+        this.dob = new Date(dob);
       } catch (error) {
         console.log(error);
       }

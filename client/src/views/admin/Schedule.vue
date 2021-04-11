@@ -3,8 +3,8 @@
     <div class="row">
       <div class="outer-w3-agile col-xl mt-3">
         <div
-          v-if="messageDisplay"
-          class="alert"
+          ref="formAlertMessage"
+          class="alert dp-none"
           :class="[isSuccessful ? 'alert-success' : 'alert-danger']"
           role="alert"
         >
@@ -25,8 +25,8 @@
         <modal-window v-if="showModal" @open="handleModal">
           <template v-slot:title> Add Schedule </template>
           <div
-            v-if="messageDisplay"
-            class="alert"
+            ref="eventAddMessage"
+            class="alert dp-none"
             :class="[isSuccessful ? 'alert-success' : 'alert-danger']"
             role="alert"
           >
@@ -54,23 +54,27 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="fullName">Start Time</label>
-            <input
+            <label for="start-time">Start Time</label>
+            <DatePicker
               type="time"
-              class="form-control"
-              id="fullName"
               v-model.trim="startTime"
-              autocomplete="off"
+              input-class="form-control"
+              format="hh:mm A"
+              :minute-step="30"
+              :show-second="false"
+              :use12h="true"
             />
           </div>
           <div class="form-group">
-            <label for="fullName">End Time</label>
-            <input
+            <label for="end-time">End Time</label>
+            <DatePicker
               type="time"
-              class="form-control"
-              id="fullName"
               v-model.trim="endTime"
-              autocomplete="off"
+              input-class="form-control"
+              format="hh:mm A"
+              :minute-step="30"
+              :show-second="false"
+              :use12h="true"
             />
           </div>
           <template v-slot:footer>
@@ -93,17 +97,19 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import CourseService from '@/services/course.service';
 import FromValidation from '@/mixins/FormValidation';
+import DatePicker from 'vue2-datepicker';
 import { days } from '@/assets/static';
-
 import dayjs from 'dayjs';
 
+import 'vue2-datepicker/index.css';
 import 'vue-select/dist/vue-select.css';
 
 export default {
   name: 'Schedule',
   mixins: [FromValidation],
   components: {
-    FullCalendar, // make the <FullCalendar> tag available
+    FullCalendar,
+    DatePicker,
     ModalWindow: () => import('@/components/Modal.vue'),
     VSelect: () => import('vue-select'),
     PopOver: () => import('@/components/PopOver'),
@@ -206,16 +212,20 @@ export default {
       this.selectedCourse = selectedData;
     },
     addCourseSchedule() {
+      const startTime = dayjs(this.startTime);
+      const endTime = dayjs(this.endTime);
+
       if (
         this.selectedCourse
         && this.startTime
         && this.endTime
         && Number.isInteger(this.selectedDay)
+        && endTime.diff(startTime) > 0
       ) {
         this.calendarApi.addEvent({
           title: this.selectedCourse.label,
-          startTime: this.startTime,
-          endTime: this.endTime,
+          startTime: startTime.format('HH:mm'),
+          endTime: endTime.format('HH:mm'),
           daysOfWeek: [this.selectedDay],
           classNames: [this.selectedCourse._id],
         });
@@ -224,7 +234,8 @@ export default {
         this.resetAll();
       } else {
         this.showMessage({
-          message: 'Please, fillup the form',
+          ref: 'eventAddMessage',
+          message: 'Please, fillup the form correctly',
         });
       }
     },
@@ -242,11 +253,13 @@ export default {
       try {
         await this.CourseService.addEvents({ data: allEvent });
         this.showMessage({
+          ref: 'formAlertMessage',
           success: true,
           message: 'Course events successfully updated.',
         });
       } catch (error) {
         this.showMessage({
+          ref: 'formAlertMessage',
           message: error?.response?.data?.message ?? 'Something Wrong!!!',
         });
       }

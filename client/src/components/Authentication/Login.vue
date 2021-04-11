@@ -328,7 +328,7 @@ iframe {
 
 .input100 {
   font-family: Ubuntu-Bold;
-  font-size: 15px;
+  font-size: 18px;
   color: #1b3815;
   line-height: 1.2;
 
