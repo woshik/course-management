@@ -29,8 +29,26 @@ const courseEvents = {
   }),
 };
 
+const attendance = {
+  date: Joi.date().required().messages({
+    'any.required': 'Date of birth must be a valid date',
+    'date.base': 'Date of birth must be a valid date',
+  }),
+  attendanceList: Joi.array().items(Joi.string()).required().messages({
+    'array.includesRequiredUnknowns': 'Student id not found',
+  }),
+};
+
+const getAttendance = {
+  startDate: Joi.date(),
+  endDate: Joi.date(),
+  date: Joi.date(),
+};
+
 module.exports = {
   addCourse,
   assignCourse,
   courseEvents,
+  attendance,
+  getAttendance,
 };

@@ -26,9 +26,12 @@
             <label for="exampleFormControlInput1">Date of Birth</label>
             <date-picker
               v-model="dob"
+              ref="datePicker"
               format="DD-MM-YYYY"
               input-class="form-control"
               placeholder="Date of Birth"
+              :popup-style="popupStype"
+              @open="datePickerOpen"
             >
             </date-picker>
           </div>
@@ -63,6 +66,7 @@ export default {
       UserService: new UserService(),
       fullName: '',
       dob: '',
+      popupStype: {},
     };
   },
   formFields: ['fullName', 'dob'],
@@ -91,6 +95,10 @@ export default {
           message: error?.response?.data?.message ?? 'Something Wrong!!!',
         });
       }
+    },
+    datePickerOpen() {
+      const { left } = this.$refs.datePicker.$el.getBoundingClientRect();
+      this.popupStype = { left: `${left}px` };
     },
   },
   computed: {

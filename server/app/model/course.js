@@ -152,6 +152,8 @@ const getStudents = asyncFunction(async (id) => {
           student: 0,
           courseCode: 0,
           courseName: 0,
+          events: 0,
+          attendance: 0,
           student_details: { password: 0 },
         },
       },
@@ -238,29 +240,84 @@ const getStudentCourseEvents = asyncFunction(async (id) => {
   const courses = await getDB().collection('courses');
 
   const result = await courses
-    .find({
-      student: {
-        $in: [id],
+    .find(
+      {
+        student: {
+          $in: [id],
+        },
       },
-    },
-    {
-      projection: {
-        events: 1,
-        _id: 0,
+      {
+        projection: {
+          events: 1,
+          _id: 0,
+        },
       },
-    })
+    )
     .toArray();
 
   let finalOutput = [];
 
   result.forEach((data) => {
-    finalOutput = [
-      ...finalOutput,
-      ...(data?.events ?? []),
-    ];
+    finalOutput = [...finalOutput, ...(data?.events ?? [])];
   });
 
   return finalOutput;
+});
+
+const createAttendance = asyncFunction(async (data) => {
+  const courses = await getDB().collection('courses');
+
+  // eslint-disable-next-line no-param-reassign
+  data.attendanceList = data?.attendanceList?.map((id) => ObjectId(id)) ?? [];
+
+  await courses.updateOne(
+    {
+      _id: data.id,
+    },
+    {
+      $pull: { attendance: { date: data.date } },
+    },
+  );
+
+  courses.updateOne(
+    {
+      _id: data.id,
+    },
+    {
+      $push: {
+        attendance: {
+          date: data.date,
+          students: data.attendanceList,
+        },
+      },
+    },
+  );
+
+  return true;
+});
+
+const getStudentAttendance = asyncFunction(async (data) => {
+  const courses = await getDB().collection('courses');
+  console.log(courses);
+  // const result = await courses
+  //   .aggregate([
+  //     {
+  //       $match: { _id: data.id },
+  //     },
+  //     {
+  //       $project: {
+  //         attendance: {
+  //           $gte: ['attendance.date', data.startDate],
+  //           $lte: ['attendance.date', data.endDate],
+  //         },
+  //       },
+  //     },
+  //   ])
+  //   .toArray();
+
+  // console.log(result);
+
+  return [];
 });
 
 module.exports = {
@@ -276,4 +333,6 @@ module.exports = {
   createEvent,
   getCourseEvents,
   getStudentCourseEvents,
+  createAttendance,
+  getStudentAttendance,
 };

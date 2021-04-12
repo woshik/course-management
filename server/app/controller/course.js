@@ -12,6 +12,8 @@ const {
   createEvent,
   getCourseEvents,
   getStudentCourseEvents,
+  createAttendance,
+  getStudentAttendance,
 } = require('../model/course');
 
 const add = async (req, res) => {
@@ -88,6 +90,16 @@ const getEvents = async (req, res) => res.json(await getCourseEvents());
 
 const getStudentEvents = async (req, res) => res.json(await getStudentCourseEvents(req.user._id));
 
+const addAttendance = async (req, res) => {
+  if (await createAttendance(req.routeData)) {
+    res.json({ success: true });
+  } else {
+    res.status(400).json({ success: false, message: 'Operation fail, Try again later' });
+  }
+};
+
+const getAttendance = async (req, res) => res.json(await getStudentAttendance(req.routeData));
+
 module.exports = {
   add,
   getData,
@@ -100,4 +112,6 @@ module.exports = {
   addEvents,
   getEvents,
   getStudentEvents,
+  addAttendance,
+  getAttendance,
 };

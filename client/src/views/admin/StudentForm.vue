@@ -27,9 +27,12 @@
           <label for="dob">Date of Birth</label>
           <date-picker
             v-model="dob"
+            ref="datePicker"
             input-class="form-control"
             format="DD-MM-YYYY"
             placeholder="Date of Birth"
+            :popup-style="popupStype"
+            @open="datePickerOpen"
           />
         </div>
 
@@ -82,6 +85,7 @@ export default {
       fullName: '',
       dob: '',
       email: '',
+      popupStype: {},
       StudentService: new StudentService(),
     };
   },
@@ -122,6 +126,10 @@ export default {
     },
     changeDateFieldToText(e) {
       e.target.type = 'text';
+    },
+    datePickerOpen() {
+      const { left } = this.$refs.datePicker.$el.getBoundingClientRect();
+      this.popupStype = { left: `${left}px` };
     },
   },
   computed: {

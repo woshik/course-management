@@ -44,4 +44,20 @@ export default class Course extends Service {
       method: 'get',
     }).then((result) => result);
   }
+
+  studentAttendance(id, data) {
+    return request({
+      url: `${this.apiURL}/attendance/${id}`,
+      method: 'post',
+      data,
+    }).then((result) => result);
+  }
+
+  getAttendance(id, params) {
+    return request({
+      url: `${this.apiURL}/attendance/${id}`,
+      method: 'get',
+      params,
+    }).then((result) => result);
+  }
 }

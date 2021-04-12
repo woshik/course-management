@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row">
-      <div class="outer-w3-agile col-xl mt-3">
+      <div class="outer-w3-agile col-xl">
         <div
           ref="formAlertMessage"
           class="alert dp-none"
@@ -97,7 +97,6 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import CourseService from '@/services/course.service';
 import FromValidation from '@/mixins/FormValidation';
-import DatePicker from 'vue2-datepicker';
 import { days } from '@/assets/static';
 import dayjs from 'dayjs';
 
@@ -109,7 +108,7 @@ export default {
   mixins: [FromValidation],
   components: {
     FullCalendar,
-    DatePicker,
+    DatePicker: () => import('vue2-datepicker'),
     ModalWindow: () => import('@/components/Modal.vue'),
     VSelect: () => import('vue-select'),
     PopOver: () => import('@/components/PopOver'),

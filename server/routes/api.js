@@ -9,6 +9,8 @@ const {
   assignCourse,
   updateStudent,
   courseEvents,
+  attendance,
+  getAttendance,
 } = require('../validation/index');
 const {
   authTokenValidation,
@@ -90,9 +92,30 @@ module.exports = {
     method: 'get',
     controller: 'course',
     function: 'getStudentEvents',
+    middleware: [authTokenValidation, permission('student')],
+  },
+  getAttendance: {
+    url: '/course/attendance/:id',
+    method: 'get',
+    controller: 'course',
+    function: 'getAttendance',
     middleware: [
       authTokenValidation,
-      permission('student'),
+      permission('admin'),
+      validate(validateId, getAttendance),
+      convertMongoObjectId,
+    ],
+  },
+  addAttendance: {
+    url: '/course/attendance/:id',
+    method: 'post',
+    controller: 'course',
+    function: 'addAttendance',
+    middleware: [
+      authTokenValidation,
+      permission('admin'),
+      validate(validateId, attendance),
+      convertMongoObjectId,
     ],
   },
   assignCourse: {
