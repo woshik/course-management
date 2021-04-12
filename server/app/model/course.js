@@ -299,6 +299,7 @@ const createAttendance = asyncFunction(async (data) => {
 const getStudentAttendance = asyncFunction(async (data) => {
   const courses = await getDB().collection('courses');
   console.log(courses);
+  console.log(data);
   // const result = await courses
   //   .aggregate([
   //     {
