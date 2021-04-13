@@ -87,14 +87,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="(student, studentIndex) in studentList"
-                :key="studentIndex"
-                @click="rowSelected(student._id)"
-              >
+              <tr v-for="(student, studentIndex) in studentList" :key="studentIndex">
                 <td>{{ student.fullName }} ({{ student.email }})</td>
-                <td>
-                  <input type="checkbox" :value="student._id" v-model="attendanceList" />
+                <td v-for="(date, dateIndex) in dateList" :key="dateIndex">
+                  <font-awesome-icon
+                    v-if="checkDateStudentIdExist(date, student._id)"
+                    icon="check"
+                  />
+                  <font-awesome-icon v-else icon="times" />
                 </td>
               </tr>
             </tbody>
@@ -159,9 +159,13 @@ export default {
       studentList: [],
       dateList: [],
       attendanceList: [],
+      selectedDateAttendanceList: {},
     };
   },
   methods: {
+    checkDateStudentIdExist(date, id) {
+      return this.selectedDateAttendanceList[date]?.includes(id);
+    },
     selectedData(selectedData) {
       this.resetData();
       this.selectedCourse = selectedData;
@@ -218,17 +222,21 @@ export default {
       this.attendanceList = [];
     },
     async generateTimeSheetToShowAttendance() {
-      const startDate = dayjs(this.dateRange[0]);
+      let startDate = dayjs(this.dateRange[0]);
       const endDate = dayjs(this.dateRange[1]);
       if (endDate.diff(startDate, 'day') < 30) {
         try {
-          const response = await this.CourseService.getAssignStudnet(this.selectedCourse._id);
-          const result = await this.CourseService.getAttendance(this.selectedCourse._id, {
+          const student = await this.CourseService.getAssignStudnet(this.selectedCourse._id);
+          const attendance = await this.CourseService.getAttendance(this.selectedCourse._id, {
             startDate: startDate.format('YYYY-MM-DD'),
             endDate: endDate.format('YYYY-MM-DD'),
           });
-          this.studentList = response?.student_details ?? [];
-          console.log(result);
+          this.studentList = student?.student_details ?? [];
+          this.selectedDateAttendanceList = attendance;
+          for (let i = 0; endDate.diff(startDate, 'day') >= 0; i += 1) {
+            this.dateList.push(startDate.format('MMM DD'));
+            startDate = startDate.add(1, 'day');
+          }
         } catch (error) {
           this.resetData();
         }
@@ -277,3 +285,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.table td:first-child{
+  text-align: left;
+}
+
+.table th, .table td {
+  text-align: center;
+}
+</style>

@@ -1,5 +1,6 @@
 /* eslint-disable radix */
 const { ObjectId } = require('mongodb');
+const moment = require('moment');
 const { getDB } = require('../../database/connection');
 const { asyncFunction } = require('../../utils/async');
 
@@ -298,27 +299,35 @@ const createAttendance = asyncFunction(async (data) => {
 
 const getStudentAttendance = asyncFunction(async (data) => {
   const courses = await getDB().collection('courses');
-  console.log(courses);
-  console.log(data);
-  // const result = await courses
-  //   .aggregate([
-  //     {
-  //       $match: { _id: data.id },
-  //     },
-  //     {
-  //       $project: {
-  //         attendance: {
-  //           $gte: ['attendance.date', data.startDate],
-  //           $lte: ['attendance.date', data.endDate],
-  //         },
-  //       },
-  //     },
-  //   ])
-  //   .toArray();
 
-  // console.log(result);
+  // TODO: query improvement
+  const result = await courses.findOne({
+    _id: data.id,
+  }, {
+    projection: {
+      _id: 0,
+      attendance: 1,
+    },
+  });
 
-  return [];
+  const startDate = moment(data.startDate);
+  const endDate = moment(data.endDate);
+
+  const finalResult = result?.attendance?.filter((item) => {
+    const date = moment(item.date);
+
+    return date.isSameOrAfter(startDate) && date.isSameOrBefore(endDate);
+  }) ?? [];
+
+  const attendance = {};
+
+  finalResult.forEach((item) => {
+    if (!attendance[item.date]) {
+      attendance[moment(item.date).format('MMM DD')] = item.students;
+    }
+  });
+
+  return attendance;
 });
 
 module.exports = {
