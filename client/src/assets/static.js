@@ -38,13 +38,13 @@ export const adminMenu = [
   },
   {
     id: 2,
-    name: 'Manage Course',
+    name: 'Manage Activities',
     icon: 'copy',
     routeName: 'Course',
   },
   {
     id: 3,
-    name: 'Manage Student',
+    name: 'Manage Users',
     icon: 'user-graduate',
     routeName: 'Student',
   },
@@ -65,8 +65,14 @@ export const adminMenu = [
 export const studentMenu = [
   {
     id: 1,
-    name: 'Course Schedule',
+    name: 'Manage Schedule',
     icon: 'calendar-alt',
     routeName: 'Dashboard',
+  },
+  {
+    id: 2,
+    name: 'Manage Attendance',
+    icon: 'clock',
+    routeName: 'Attendance',
   },
 ];

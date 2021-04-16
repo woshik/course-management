@@ -3,12 +3,12 @@
     <div class="sidebar-header">
       <h1 style="text-align: center">
         <router-link :to="{ name: 'Dashboard' }">
-          {{ isAdmin ? "Admin" : "Student" }}
+          {{ isAdmin ? "Admin" : "User" }}
         </router-link>
       </h1>
       <span style="text-align: center">
         <router-link :to="{ name: 'Dashboard' }">
-          {{ isAdmin ? "A" : "S" }}
+          {{ isAdmin ? "A" : "U" }}
         </router-link>
       </span>
     </div>

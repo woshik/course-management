@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "npm run serve",
     "ui": "vue ui"
   },
   "dependencies": {
@@ -18,14 +18,13 @@
     "@fullcalendar/vue": "^5.6.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "chokidar": "^2.1.8",
     "dayjs": "^1.10.4",
     "nprogress": "^0.2.0",
     "vue": "^2.6.11",
-    "vue-ctk-date-time-picker": "^2.5.0",
     "vue-router": "^3.2.0",
     "vue-select": "^3.11.2",
     "vue2-datepicker": "^3.9.0",
-    "vuejs-datepicker": "^1.6.2",
     "vuetable-2": "^2.0.0-beta.4",
     "vuex": "^3.4.0"
   },

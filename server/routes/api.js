@@ -53,7 +53,7 @@ module.exports = {
     method: 'get',
     controller: 'course',
     function: 'getData',
-    middleware: [authTokenValidation, permission('admin')],
+    middleware: [authTokenValidation],
   },
   addCourse: {
     url: '/course',
@@ -74,7 +74,7 @@ module.exports = {
     method: 'get',
     controller: 'course',
     function: 'getEvents',
-    middleware: [authTokenValidation, permission('admin')],
+    middleware: [authTokenValidation],
   },
   addCourseEvent: {
     url: '/course/events',
@@ -83,17 +83,16 @@ module.exports = {
     function: 'addEvents',
     middleware: [
       authTokenValidation,
-      permission('admin'),
       validate(courseEvents),
     ],
   },
-  getCourseEventForStudent: {
-    url: '/course/events/student',
-    method: 'get',
-    controller: 'course',
-    function: 'getStudentEvents',
-    middleware: [authTokenValidation, permission('student')],
-  },
+  // getCourseEventForStudent: {
+  //   url: '/course/events/student',
+  //   method: 'get',
+  //   controller: 'course',
+  //   function: 'getStudentEvents',
+  //   middleware: [authTokenValidation],
+  // },
   getAttendance: {
     url: '/course/attendance/:id',
     method: 'get',
@@ -101,7 +100,6 @@ module.exports = {
     function: 'getAttendance',
     middleware: [
       authTokenValidation,
-      permission('admin'),
       validate(validateId, getAttendance),
       convertMongoObjectId,
     ],
@@ -113,7 +111,6 @@ module.exports = {
     function: 'addAttendance',
     middleware: [
       authTokenValidation,
-      permission('admin'),
       validate(validateId, attendance),
       convertMongoObjectId,
     ],
@@ -125,7 +122,6 @@ module.exports = {
     function: 'assignCourse',
     middleware: [
       authTokenValidation,
-      permission('admin'),
       validate(validateId, assignCourse),
       convertMongoObjectId,
     ],
@@ -137,7 +133,6 @@ module.exports = {
     function: 'getAssignStudent',
     middleware: [
       authTokenValidation,
-      permission('admin'),
       validate(validateId),
       convertMongoObjectId,
     ],

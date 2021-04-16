@@ -108,7 +108,7 @@ const publicRoutes = [
       {
         path: '/schedule',
         name: 'Schedule',
-        component: () => import(/* webpackChunkName: "Schedule" */ '@/views/admin/Schedule.vue'),
+        component: () => import(/* webpackChunkName: "Schedule" */ '@/views/Schedule.vue'),
         meta: {
           title: 'Manage Schedule',
           active: 'Schedule',
@@ -117,7 +117,7 @@ const publicRoutes = [
       {
         path: '/attendance',
         name: 'Attendance',
-        component: () => import(/* webpackChunkName: "Attendance" */ '@/views/admin/Attendance.vue'),
+        component: () => import(/* webpackChunkName: "Attendance" */ '@/views/Attendance.vue'),
         meta: {
           title: 'Manage Schedule',
           active: 'Attendance',
