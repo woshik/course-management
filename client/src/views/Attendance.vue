@@ -21,7 +21,7 @@
               @search="fetchCourseData"
             >
               <template slot="no-options">
-                type to search course...
+                type to search activity...
               </template>
             </VSelect>
           </div>
@@ -198,7 +198,7 @@ export default {
       this.resetData();
       if (!this.selectedCourse) {
         this.showMessage({
-          message: 'Please, select a course name',
+          message: 'Please, select a activity name',
         });
       }
     },
@@ -212,7 +212,7 @@ export default {
         }
       } else {
         this.showMessage({
-          message: 'Please, select a course name',
+          message: 'Please, select a activity name',
         });
       }
     },
