@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="outer-w3-agile col-xl mt-3">
-      <h4 class="tittle-w3-agileits mb-4">Student Details</h4>
+      <h4 class="tittle-w3-agileits mb-4">User Details</h4>
       <form @submit.prevent="submit">
         <div class="form-group">
           <label>Full Name</label>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="form-group">
-          <label>Course Assigned</label>
+          <label>Activity Assigned</label>
           <select multiple class="form-control" disabled>
             <option v-for="(course, index) in courses" :key="index">{{ course }}</option>
           </select>

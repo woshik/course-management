@@ -6,7 +6,7 @@
           <div class="card card_border border-primary-top p-4">
             <font-awesome-icon icon="user" />
             <h3 class="text-primary number">{{ studentCount }}</h3>
-            <p class="stat-text">Total Student</p>
+            <p class="stat-text">Total User</p>
           </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
           <div class="card card_border border-primary-top p-4">
             <font-awesome-icon icon="book-open" />
             <h3 class="text-success number">{{ courseCount }}</h3>
-            <p class="stat-text">Total Course</p>
+            <p class="stat-text">Total Activity</p>
           </div>
         </div>
       </div>

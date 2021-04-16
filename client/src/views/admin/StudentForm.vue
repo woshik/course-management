@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="outer-w3-agile col-xl mt-3">
-      <h4 class="tittle-w3-agileits mb-4">{{ formLabel }} Student</h4>
+      <h4 class="tittle-w3-agileits mb-4">{{ formLabel }} User</h4>
       <div
         v-if="messageDisplay"
         class="alert"

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="outer-w3-agile col-xl mt-3">
       <button class="btn btn-primary mb-3 float-right" @click="addCourse">
-        Add Course
+        Add Activity
       </button>
       <vue-table
         ref="vuetable"
@@ -15,14 +15,14 @@
       >
       <template v-slot:default="{rowData}">
         <button class="btn btn-success btn-sm m-1" @click="assignCourse(rowData)">
-          <font-awesome-icon icon="address-book" /> Assign Course
+          <font-awesome-icon icon="address-book" /> Assign Activity
         </button>
       </template>
       </vue-table>
     </div>
     <modal-window v-if="showModal" @open="handleModal">
-      <template v-slot:title> Delete Course </template>
-      You want to really delete this course?
+      <template v-slot:title> Delete Activity </template>
+      You want to really delete this Activity?
       <template v-slot:footer>
         <button class="btn btn-danger" @click="deleteRow(null)">Delete</button>
       </template>
@@ -48,8 +48,8 @@ export default {
       CourseService: new CourseService(),
       tableFields: [
         { name: VuetableFieldSequence, title: 'No.' },
-        { name: 'courseName', title: 'Course Name' },
-        { name: 'courseCode', title: 'Course Code' },
+        { name: 'courseName', title: 'Activity Name' },
+        { name: 'courseCode', title: 'Activity Code' },
         { name: 'actions', title: 'Actions', width: '30%' },
       ],
       tabeleData: [],

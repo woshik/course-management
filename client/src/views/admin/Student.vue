@@ -10,7 +10,7 @@
         {{ messageDisplay }}
       </div>
       <button class="btn btn-primary mb-3 float-right" @click="addStudent">
-        Add Student
+        Add User
       </button>
       <vue-table
         ref="vuetable"
@@ -40,8 +40,8 @@
     </div>
 
     <modal-window v-if="showModal.deleteModal" @open="handleModal">
-      <template v-slot:title> Delete Student </template>
-      Do you want to really delete this student?
+      <template v-slot:title> Delete User </template>
+      Do you want to really delete this User?
       <template v-slot:footer>
         <button class="btn btn-danger" @click="deleteRow(null)">Delete</button>
       </template>

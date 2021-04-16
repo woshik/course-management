@@ -15,7 +15,7 @@
             Save Schedule
           </button>
           <button class="btn btn-primary m-1 float-right" @click="handleModal">
-            Add Course Schedule
+            Add Activity Schedule
           </button>
           <div class="clearfix"></div>
         </div>
@@ -33,7 +33,7 @@
             {{ messageDisplay }}
           </div>
           <div class="form-group">
-            <label for="courseName">Course Name</label>
+            <label for="courseName">Activity Name</label>
             <VSelect
               :options="courseData"
               :filterable="false"
@@ -44,6 +44,14 @@
                 type to search course...
               </template>
             </VSelect>
+          </div>
+           <div class="form-group">
+            <label for="nof">Number of people</label>
+            <select class="form-control" id="nof" v-model.number="numberOfPeople">
+              <option v-for="nof in 10" :key="nof" :value="nof">
+                {{ nof }}
+              </option>
+            </select>
           </div>
           <div class="form-group">
             <label for="fullName">Select Day</label>
@@ -128,6 +136,7 @@ export default {
       showPopover: false,
       positionX: 0,
       positionY: 0,
+      numberOfPeople: 0,
       calendarOptions: {
         plugins: [timeGridPlugin, interactionPlugin],
         handleWindowResize: true,
@@ -222,7 +231,7 @@ export default {
         && endTime.diff(startTime) > 0
       ) {
         this.calendarApi.addEvent({
-          title: this.selectedCourse.label,
+          title: `${this.selectedCourse.label} - ${this.numberOfPeople}`,
           startTime: startTime.format('HH:mm'),
           endTime: endTime.format('HH:mm'),
           daysOfWeek: [this.selectedDay],

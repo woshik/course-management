@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="outer-w3-agile col-xl mt-3">
-      <h4 class="tittle-w3-agileits mb-4">{{ formLabel }} Course</h4>
+      <h4 class="tittle-w3-agileits mb-4">{{ formLabel }} Activity</h4>
       <div
         v-if="messageDisplay"
         class="alert"
@@ -12,24 +12,24 @@
       </div>
       <form @submit.prevent="submit">
         <div class="form-group">
-          <label for="courseName">Course Name</label>
+          <label for="courseName">Activity Name</label>
           <input
             type="text"
             class="form-control"
             id="courseName"
-            placeholder="Course Name"
+            placeholder="Activity Name"
             autocomplete="off"
             v-model.trim="courseName"
           />
         </div>
 
         <div class="form-group">
-          <label for="courseCode">Course Code</label>
+          <label for="courseCode">Activity Code</label>
           <input
             type="text"
             class="form-control"
             id="courseCode"
-            placeholder="Course Code"
+            placeholder="Activity Code"
             autocomplete="off"
             v-model.trim="courseCode"
           />

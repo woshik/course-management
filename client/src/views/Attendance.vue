@@ -12,11 +12,11 @@
         </div>
         <form @submit.prevent="formSubmit">
           <div class="form-group">
-            <label for="courseName">Course Name</label>
+            <label for="courseName">Activity Name</label>
             <VSelect
               :options="courseData"
               :filterable="false"
-              placeholder="Select Course"
+              placeholder="Select Activity"
               @option:selected="selectedData"
               @search="fetchCourseData"
             >
@@ -82,7 +82,7 @@
           <table class="table table-bordered table-hover">
             <thead>
               <tr>
-                <th>Student Name</th>
+                <th>User Name</th>
                 <th v-for="(date, index) in dateList" :key="index">{{ date }}</th>
               </tr>
             </thead>
@@ -104,7 +104,7 @@
           <table class="table table-bordered table-hover">
             <thead>
               <tr>
-                <th>Student Name</th>
+                <th>User Name</th>
                 <th v-for="(date, index) in dateList" :key="index">{{ date }}</th>
               </tr>
             </thead>

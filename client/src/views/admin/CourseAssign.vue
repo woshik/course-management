@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="outer-w3-agile col-xl mt-3">
-      <h4 class="tittle-w3-agileits mb-4">Assign Course</h4>
+      <h4 class="tittle-w3-agileits mb-4">Assign Activity</h4>
       <div
         v-if="messageDisplay"
         class="alert"
@@ -12,7 +12,7 @@
       </div>
       <form @submit.prevent="submitForm">
         <div class="form-group">
-          <label for="courseName">Select Student</label>
+          <label for="courseName">Select User</label>
           <VSelect
             multiple
             :options="studentData"
@@ -21,7 +21,7 @@
             @search="fetchStudentData"
           >
             <template slot="no-options">
-              type to search students...
+              type to search user...
             </template>
           </VSelect>
         </div>
