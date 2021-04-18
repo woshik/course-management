@@ -34,16 +34,16 @@ const publicRoutes = [
         },
       },
       {
-        path: '/course',
+        path: '/activity',
         name: 'Course',
-        component: () => import(/* webpackChunkName: "Course" */ '@/views/admin/Course.vue'),
+        component: () => import(/* webpackChunkName: "Course" */ '@/views/Course.vue'),
         meta: {
           title: 'Manage Course',
           active: 'Course',
         },
       },
       {
-        path: '/course/add',
+        path: '/activity/add',
         name: 'AddCourse',
         component: () => import(/* webpackChunkName: "CourseForm" */ '@/views/admin/CourseForm.vue'),
         meta: {
@@ -52,7 +52,7 @@ const publicRoutes = [
         },
       },
       {
-        path: '/course/edit/:id',
+        path: '/activity/edit/:id',
         name: 'EditCourse',
         component: () => import(/* webpackChunkName: "courseForm" */ '@/views/admin/CourseForm.vue'),
         meta: {
@@ -61,16 +61,16 @@ const publicRoutes = [
         },
       },
       {
-        path: '/course/assign/:id',
+        path: '/activity/assign/:id',
         name: 'AssignCourse',
-        component: () => import(/* webpackChunkName: "AssignCourse" */ '@/views/admin/CourseAssign.vue'),
+        component: () => import(/* webpackChunkName: "AssignCourse" */ '@/views/CourseAssign.vue'),
         meta: {
           title: 'Assign Course',
           active: 'Course',
         },
       },
       {
-        path: '/student',
+        path: '/user',
         name: 'Student',
         component: () => import(/* webpackChunkName: "Student" */ '@/views/admin/Student.vue'),
         meta: {
@@ -79,7 +79,7 @@ const publicRoutes = [
         },
       },
       {
-        path: '/student/add',
+        path: '/user/add',
         name: 'AddStudent',
         component: () => import(/* webpackChunkName: "StudentForm" */ '@/views/admin/StudentForm.vue'),
         meta: {
@@ -88,7 +88,7 @@ const publicRoutes = [
         },
       },
       {
-        path: '/student/edit/:id',
+        path: '/user/edit/:id',
         name: 'EditStudent',
         component: () => import(/* webpackChunkName: "StudentForm" */ '@/views/admin/StudentForm.vue'),
         meta: {
@@ -97,7 +97,7 @@ const publicRoutes = [
         },
       },
       {
-        path: '/student/details/:id',
+        path: '/user/details/:id',
         name: 'StudentDetails',
         component: () => import(/* webpackChunkName: "StudentDetails" */ '@/views/admin/StudentDetails.vue'),
         meta: {

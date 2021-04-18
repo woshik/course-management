@@ -178,7 +178,7 @@ module.exports = {
     method: 'get',
     controller: 'student',
     function: 'getData',
-    middleware: [authTokenValidation, permission('admin')],
+    middleware: [authTokenValidation],
   },
   getStudentCount: {
     url: '/student/count',

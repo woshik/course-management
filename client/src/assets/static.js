@@ -71,6 +71,12 @@ export const studentMenu = [
   },
   {
     id: 2,
+    name: 'Manage Activities',
+    icon: 'copy',
+    routeName: 'Course',
+  },
+  {
+    id: 3,
     name: 'Manage Attendance',
     icon: 'clock',
     routeName: 'Attendance',

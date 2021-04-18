@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="clearfix" />
-    <div class="form-group mb-3">
+    <div v-if="searchBoxShow" class="form-group mb-3">
       <input
         type="text"
         class="form-control float-right"
@@ -27,15 +27,17 @@
         <template v-slot:actions="{ rowData }">
           <div class="table-button-container">
             <slot :rowData="rowData"></slot>
-            <button
-              class="btn btn-warning btn-sm m-1"
-              @click="actionButton('edit-row', rowData)"
-            >
-              <font-awesome-icon icon="edit" /> Edit
-            </button>
-            <button class="btn btn-danger btn-sm m-1" @click="actionButton('delete-row', rowData)">
-              <font-awesome-icon icon="trash-alt" /> Delete
-            </button>
+            <div v-if="actionButtonShow" style="display:inline-block">
+              <button class="btn btn-warning btn-sm m-1" @click="actionButton('edit-row', rowData)">
+                <font-awesome-icon icon="edit" /> Edit
+              </button>
+              <button
+                class="btn btn-danger btn-sm m-1"
+                @click="actionButton('delete-row', rowData)"
+              >
+                <font-awesome-icon icon="trash-alt" /> Delete
+              </button>
+            </div>
           </div>
         </template>
       </vuetable>
@@ -68,6 +70,14 @@ export default {
     totalRow: {
       type: Number,
       default: 0,
+    },
+    actionButtonShow: {
+      type: Boolean,
+      default: true,
+    },
+    searchBoxShow: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -108,10 +118,7 @@ export default {
           per_page: pagination.per_page,
         });
       } else {
-        const paginationData = this.$refs.vuetable.makePagination(
-          this.totalRow,
-          this.perPage,
-        );
+        const paginationData = this.$refs.vuetable.makePagination(this.totalRow, this.perPage);
 
         return {
           pagination: paginationData,

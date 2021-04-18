@@ -56,7 +56,11 @@ const getCoursesData = asyncFunction(async (query) => {
       skip: currentPage * perPage,
       limit: perPage,
       projection: {
-        student: 0,
+        student: {
+          $size: '$student',
+        },
+        courseName: 1,
+        courseCode: 1,
       },
     })
     .toArray();
