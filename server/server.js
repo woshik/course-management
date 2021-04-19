@@ -68,11 +68,6 @@ server.use((req, res) => {
   res.status(404).send("Sorry can't find that api!");
 });
 
-// error handler
-server.use((err, req, res) => {
-  res.status(500).send('Something broke!');
-});
-
 connectWithMongodb(() => {
   console.log('database connected');
 });

@@ -20,16 +20,18 @@ const logger = createLogger({
   ],
 });
 
-logger.add(
-  new transports.Console({
-    format: format.combine(
-      format.timestamp(),
-      format.colorize(),
-      format.printf(
-        (info) => `${info.timestamp} ${info.level}: ${info.message}`,
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(
+    new transports.Console({
+      format: format.combine(
+        format.timestamp(),
+        format.colorize(),
+        format.printf(
+          (info) => `${info.timestamp} ${info.level}: ${info.message}`,
+        ),
       ),
-    ),
-  }),
-);
+    }),
+  );
+}
 
 module.exports = logger;
